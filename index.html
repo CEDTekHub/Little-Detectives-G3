@@ -206,7 +206,29 @@ function locationGroup(t){
  if(solved.includes(t.name))d.classList.add('located');return d;
 }
 const oldRenderScene=renderScene;
-renderScene=function(){if(gameRound!==5)return oldRenderScene();['props','targets','fronts'].forEach(id=>$('#'+id).replaceChildren());round.forEach(t=>{const d=locationGroup(t);d.style.cssText+=`;position:absolute;left:${t.station.x}%;top:${t.station.y}%;width:${t.station.w}%;transform:translate(-50%,-50%);`;$('#targets').append(d)});draw()};
+// Each location gets an exclusive cell; fit the complete scene inside it.
+function round5FitBox(cellWidth,cellHeight,aspect){return Math.max(0,Math.min(cellWidth*.82,cellHeight*.74*aspect))}
+function fitRound5Groups(){
+ if(gameRound!==5)return;
+ const layer=$('#targets'),scene=$('#scene').getBoundingClientRect();
+ layer.style.gridTemplateColumns=scene.width<scene.height*.95?'repeat(2,minmax(0,1fr))':'repeat(3,minmax(0,1fr))';
+ layer.style.gridTemplateRows=scene.width<scene.height*.95?'repeat(3,minmax(0,1fr))':'repeat(2,minmax(0,1fr))';
+ layer.querySelectorAll('.round5-cell').forEach(cell=>{
+  const group=cell.firstElementChild,r=cell.getBoundingClientRect();
+  if(!group||r.width<=0||r.height<=0)return;
+  const [w,h]=artSizes[group.dataset.location];
+  group.style.width=round5FitBox(r.width,r.height,w/h)+'px';
+ });
+}
+renderScene=function(){
+ const layer=$('#targets');
+ if(gameRound!==5){layer.classList.remove('round5-spaced');layer.style.removeProperty('grid-template-columns');layer.style.removeProperty('grid-template-rows');return oldRenderScene()}
+ ['props','targets','fronts'].forEach(id=>$('#'+id).replaceChildren());
+ layer.classList.add('round5-spaced');
+ round.forEach(t=>{const cell=document.createElement('div');cell.className='round5-cell';const d=locationGroup(t);d.dataset.location=t.station.anchor;cell.append(d);layer.append(cell)});
+ fitRound5Groups();requestAnimationFrame(fitRound5Groups);draw();
+};
+new ResizeObserver(()=>{fitRound5Groups()}).observe($('#scene'));
 const oldNewRound=newRound;
 newRound=function(n=gameRound){if('speechSynthesis'in window)speechSynthesis.cancel();oldNewRound(n);if(n!==5)return;const slots=shuffle([{x:18,y:62},{x:50,y:62},{x:82,y:62},{x:18,y:85},{x:50,y:85},{x:82,y:85}]);const ns=shuffle(names);round=shuffle(locationPlans).map((p,i)=>({name:ns[i],station:{...p,...slots[i]}}));renderScene();notebook();ui()};
 const oldUI=ui;
@@ -263,4 +285,8 @@ function redraw(){ctx.clearRect(0,0,1200,300);for(const s of strokes){ctx.global
 const keyboard=document.createElement('div');keyboard.className='practice-keyboard';keyboard.hidden=true;const kb=button('Keyboard',()=>{keyboard.hidden=!keyboard.hidden;kb.setAttribute('aria-expanded',String(!keyboard.hidden));if(!keyboard.hidden)target?.focus()});kb.setAttribute('aria-expanded','false');for(const key of [...'abcdefghijklmnopqrstuvwxyz',"'",'.','Space','⌫','Next blank']){const b=button(key,()=>{if(!target)return;if(key==='Next blank'){const inputs=[...wrap.querySelectorAll('input[type=text],textarea')].filter(x=>x!==picker);target=inputs[(inputs.indexOf(target)+1)%inputs.length]||target;target.focus();return}const start=target.selectionStart??target.value.length,end=target.selectionEnd??start;let text=key==='Space'?' ':key==='⌫'?'':key;const from=key==='⌫'&&start===end?Math.max(0,start-1):start;target.setRangeText(text,from,end,'end');target.dispatchEvent(new Event('input',{bubbles:true}));target.focus()});b.onpointerdown=e=>e.preventDefault();keyboard.append(b)}tools.append(pen,rubber,picker,width,button('Undo',()=>{strokes.pop();redraw()}),button('Clear writing',()=>{strokes=[];redraw()}),kb);const note=document.createElement('div');note.textContent='Write below, or use the keyboard in the answer blanks.';kit.append(note,tools,canvas,keyboard);wrap.append(kit);return wrap};
 })();
 </script>
-</body></html>
+<style>
+#targets.round5-spaced{inset:12% 3% 3%;display:grid;gap:clamp(12px,2vmin,28px);align-items:stretch;justify-items:stretch}
+#targets.round5-spaced .round5-cell{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+#targets.round5-spaced .location-group{position:relative;flex:0 0 auto;max-width:82%;height:auto;transform:none}
+</style></body></html>
