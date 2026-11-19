@@ -1023,7 +1023,7 @@ refreshButton();
 @media(prefers-reduced-motion:reduce){#ldItemFeedback.ld-pop{animation:none}}
 </style>
 <section id="ldHub" hidden aria-label="Live classroom multiplayer">
-<header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
+<header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><button id="ldClassroomTools" class="ld-tools-shortcut" type="button" aria-haspopup="dialog" aria-controls="hubPlayboard">Classroom Tools</button><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
 <div id="ldStatus" role="status" aria-live="polite">Choose a preview or connect Firebase to host a live class.</div>
 <div id="ldTeacher" class="ld-grid"><aside class="ld-stack"><section class="ld-card ld-stack"><h2>Class connection</h2><div id="ldDemoBanner" class="ld-banner" hidden>Preview only · These sessions work between tabs in this browser. Other iPads need Firebase.</div><label>Connection<select id="ldBackend"><option value="demo">Local preview · no account needed</option><option value="firebase">Firebase · live class</option></select></label><div id="ldFirebaseFields" class="ld-stack" hidden><label>Firebase Web API key<input id="ldApiKey" autocomplete="off" placeholder="AIza…"></label><label>Realtime Database URL<input id="ldDatabaseURL" type="url" placeholder="https://your-project-default-rtdb.asia-southeast1.firebasedatabase.app"></label><label>Teacher email<input id="ldEmail" type="email" autocomplete="username"></label><label>Teacher password<input id="ldPassword" type="password" autocomplete="current-password"></label><button id="ldLogin" class="ld-primary">Save connection & sign in</button><p class="ld-note">Use a teacher account created in your Firebase project. The supplied rules require its UID in the teacher allowlist. Never enter a service-account key.</p></div><p id="ldIdentity" class="ld-note">Local teacher preview</p><button id="ldLogout">Sign out</button></section><section class="ld-card ld-stack"><h2>Create a session</h2><label>Class / session title<input id="ldClass" maxlength="60" value="Grade 4 Detectives"></label><label>Student game<select id="ldGame"><option value="words">Round 1 · Stationery scan</option><option value="locations">Round 2 · Location scan</option><option value="quiz">QUIZ</option><option value="custom">Imported exam quiz</option></select></label><div id="ldQuizSettings" hidden><label>Quiz pace <select id="ldPace"><option value="student">Student-paced</option><option value="teacher">Teacher-paced · Live Quiz</option></select></label><label id="ldItemTimeField" hidden>Time per question <input id="ldItemSeconds" type="number" min="5" max="600" step="1" value="30" inputmode="numeric"> <span>seconds (60 = 1 minute)</span></label><label>Question order <select id="ldOrder"><option value="same">Worksheet order for everyone</option><option value="shared">Shuffle once · same order for everyone</option><option value="individual">Shuffle separately for each student</option></select></label></div><details id="ldExamTools"><summary>Import an exam</summary><label>Upload a text-based exam <input id="ldExamFile" type="file" accept=".docx,.pdf,.txt,.json"></label><p>Number each question. Label options A, B, C, etc. Add an Answer Key (1. B, 2. A) or put Answer: B below each question.</p><textarea id="ldExamText" rows="8" aria-label="Exam text or JSON" placeholder="Paste your exam here"></textarea><button id="ldExamParse">Convert & review</button><p id="ldExamStatus" role="status"></p><label>Quiz part <select id="ldExamPart"></select></label><button id="ldExamDownload" disabled>Download quiz JSON</button><button id="ldExamPrint" disabled>Print exam</button></details><label id="ldOverallLimit">Time limit<select id="ldLimit"><option value="180">3 minutes</option><option value="300" selected>5 minutes</option><option value="600">10 minutes</option><option value="0">No limit</option></select></label><label>Published hub URL<input id="ldBaseURL" type="url" placeholder="https://yourname.github.io/your-repository/"></label><button id="ldCreate" class="ld-primary">Create session</button><label>Reopen an existing session<input id="ldExisting" maxlength="12" placeholder="Session code"></label><button id="ldLoad">Load session</button></section></aside>
 <main class="ld-stack"><section id="ldNoSession" class="ld-card"><h2>Ready for your first live class?</h2><p>Create a preview session to explore the workflow now. Once Firebase is connected, students can scan your QR code, enter their names, and play simultaneously.</p><p>These two student games are added alongside your existing activities. Your slides, Teacher’s Nook, and original rounds remain teacher tools.</p></section><section id="ldSessionPanel" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><h2 id="ldSessionTitle"></h2><strong id="ldSessionState"></strong></div><div class="ld-row"><button id="ldStart" class="ld-primary">Start / Resume</button><button id="ldDisplay">Open live display</button><button id="ldPause">Pause</button><button id="ldEnd">End & publish scores</button><button id="ldExport">Download CSV</button><button id="ldPublish">Publish scores again</button></div><div class="ld-metrics"><span id="ldCount">0 players</span><span id="ldFinished">0 finished</span><span id="ldClock">Waiting</span></div><details open><summary>Invite students</summary><p id="ldCode"></p><canvas id="ldQR" hidden aria-label="Student session QR code"></canvas><input id="ldLink" readonly aria-label="Student link"><div class="ld-row"><button id="ldCopy">Copy student link</button><button id="ldOpenStudent">Open student preview</button><button id="ldShowQR">Show QR full screen</button><button id="ldDownloadQR">Download QR image</button></div><p id="ldQRNote" class="ld-note"></p></details><p class="ld-note" id="ldUpdated">Waiting for players.</p><div class="ld-table-wrap"><table><thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Answered</th><th>Active time</th><th>Joined</th><th>Last answer</th></tr></thead><tbody id="ldRows"></tbody></table></div><div class="ld-row"><button id="ldTeacherSound" aria-pressed="false">Sound off</button><label>Quiz volume <input id="ldTeacherVolume" type="range" min="0" max="100" value="35"></label></div><section id="ldPacedControls" hidden></section><details id="ldAnswerReview" hidden><summary>Check quiz answers</summary><label>Student<select id="ldReviewStudent"></select></label><ol id="ldReviewAnswers"></ol></details><p class="ld-note">Scores: 10 points per correct answer. Ties use less active time, then the final answer timestamp. Names may repeat; each device receives a separate player ID.</p><label><input id="ldShowRanks" type="checkbox" checked> Show rankings on teacher screen</label></section></main></div>
@@ -2404,7 +2404,7 @@ function elapsedAt(meta,at=now()){return Object.values(meta.timeline||{}).reduce
 function secondsLeft(meta){return meta.limitSeconds?Math.max(0,meta.limitSeconds-Math.floor(elapsedAt(meta)/1000)):Infinity}
 function formatTime(ms){const secs=Math.max(0,Math.floor(ms/1000));return Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')}
 function ranked(s,ks,ps){return Object.entries(ps||{}).map(([id,p])=>{const answers=Object.entries(p.answers||{}),at=answers.length?Math.max(...answers.map(([,a])=>a.at)):0;return {id,name:p.name||'Student',score:answers.reduce((sum,[q,a])=>sum+(ks[q]===a.choice?10:0),0),answered:answers.length,time:at?elapsedAt(s.meta,at):0,joinedAt:p.joinedAt,at}}).sort((a,b)=>b.score-a.score||b.answered-a.answered||a.time-b.time||a.at-b.at||a.id.localeCompare(b.id))}
-function setRole(next){if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldStudentTools').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldWaiting').hidden=true;$('ldPlayCard').hidden=true;updateConnection()}
+function setRole(next){if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldClassroomTools').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldStudentTools').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldWaiting').hidden=true;$('ldPlayCard').hidden=true;updateConnection()}
 function updateConnection(){$('ldFirebaseFields').hidden=backend!=='firebase';$('ldDemoBanner').hidden=backend!=='demo';$('ldBackend').value=backend;$('ldIdentity').textContent=backend==='demo'?'Local preview · no remote connection':auth?'Signed in · UID: '+auth.uid:'Firebase not signed in'}
 function open(next='teacher'){try{if(typeof pause==='function')pause()}catch{}ROOT.hidden=false;setRole(next);clearInterval(loop);clearInterval(clockLoop);loop=setInterval(()=>poll(),4000);clockLoop=setInterval(tick,500);status(backend==='demo'?'Preview mode: use another tab in this browser to try student play.':'Connect your Firebase project to begin.')}
 function close(){hideJoinQR();if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;ROOT.hidden=true;clearInterval(loop);clearInterval(clockLoop)}
@@ -2569,6 +2569,7 @@ const displayCss=`
   .ld-display h1{font-size:clamp(32px,5vw,66px);margin:0;color:#fff}
   .ld-display p{margin:8px 0 18px;color:#c3e4df}
   .ld-display button{font:inherit;font-weight:bold;background:#b0f1d7;color:#163c38;border:0;border-radius:10px;padding:9px 14px;cursor:pointer}
+  .ld-display .display-tools-shortcut{background:#e8f8ef;color:#193f35;border:1px solid #9abfb1;min-height:44px}
   .ld-display .display-actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
   .ld-display .display-podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
   .ld-display .display-medal{background:#254553;border:2px solid #6cb8ad;border-radius:16px;padding:18px;overflow-wrap:anywhere}
@@ -2700,6 +2701,12 @@ function renderLiveDisplay(){
     if(soundEnabled)displayAudio?.resume().catch(()=>{});
     renderLiveDisplay();
   });
+  if(typeof window.openClassroomTools==='function'){
+    const tools=make('button','Classroom Tools','display-tools-shortcut');
+    tools.setAttribute('aria-haspopup','dialog');
+    tools.onclick=()=>{window.focus?.();window.openClassroomTools()};
+    actions.append(tools);
+  }
   if(teacherPaced()&&!ended){
     action(quizSoundOn?'Sound on':'Sound off',run(async()=>{await toggleQuizSound();renderLiveDisplay()}));
     const volume=make('input');
@@ -3253,7 +3260,8 @@ function restoreImportedQuiz(saved,answerKeys){
 }
 
 $('ldApiKey').value=cfg.apiKey;$('ldDatabaseURL').value=cfg.databaseURL;$('ldBaseURL').value=/^https?:/.test(location.protocol)?location.href.split('#')[0]:'';
-$('ldBackend').onchange=()=>{backend=$('ldBackend').value;setRole('teacher');status(backend==='demo'?'Local preview selected.':'Enter your Firebase connection and teacher sign-in.')};$('ldLogin').onclick=run(async()=>{cfg=readConfig();await signIn($('ldEmail').value.trim(),$('ldPassword').value);localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));$('ldPassword').value='';updateConnection();await teacherReady();status('Connected. You can create a live classroom session.')});$('ldLogout').onclick=()=>{authStore().removeItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL);auth=null;setRole(role);status('Signed out. Saved class results remain in Firebase.')};$('ldTeacherTab').onclick=()=>setRole('teacher');$('ldStudentTab').onclick=()=>setRole('student');$('ldClose').onclick=close;$('ldCreate').onclick=run(createSession);$('ldLoad').onclick=run(()=>loadSession($('ldExisting').value));$('ldStart').onclick=run(async()=>{
+$('ldBackend').onchange=()=>{backend=$('ldBackend').value;setRole('teacher');status(backend==='demo'?'Local preview selected.':'Enter your Firebase connection and teacher sign-in.')};$('ldLogin').onclick=run(async()=>{cfg=readConfig();await signIn($('ldEmail').value.trim(),$('ldPassword').value);localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));$('ldPassword').value='';updateConnection();await teacherReady();status('Connected. You can create a live classroom session.')});$('ldLogout').onclick=()=>{authStore().removeItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL);auth=null;setRole(role);status('Signed out. Saved class results remain in Firebase.')};$('ldClassroomTools').onclick=()=>window.openClassroomTools?.();
+$('hubPlayboardHome')?.addEventListener('click',()=>{if(!ROOT.hidden)close()});$('ldTeacherTab').onclick=()=>setRole('teacher');$('ldStudentTab').onclick=()=>setRole('student');$('ldClose').onclick=close;$('ldCreate').onclick=run(createSession);$('ldLoad').onclick=run(()=>loadSession($('ldExisting').value));$('ldStart').onclick=run(async()=>{
   hideJoinQR();if(session?.meta.state==='waiting')openLiveDisplay();
   await control('live');
 });
@@ -3267,4 +3275,90 @@ window.addEventListener('online',()=>poll());document.addEventListener('visibili
 window.LDLiveHelpers={buildQuestions,elapsedAt,ranked,configValid};
 })();
 
+</script>
+<style>
+button.ld-tools-shortcut,#ldHub button.ld-tools-shortcut{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ position:static;flex:0 0 auto;min-height:44px;padding:8px 14px;margin:0;
+ border:1px solid #9abfb1;border-radius:12px;
+ background:linear-gradient(160deg,#f2fbf6,#dcf0e7);color:#193f35;
+ font:700 15px/1.2 Andika,system-ui,sans-serif;white-space:nowrap;
+ box-shadow:0 2px 4px #193f3512;cursor:pointer
+}
+button.ld-tools-shortcut::before{content:"";width:8px;height:8px;border-radius:2px;background:#36816a;flex:none}
+button.ld-tools-shortcut:hover,#ldHub button.ld-tools-shortcut:hover{background:#d0ebdf}
+button.ld-tools-shortcut:focus-visible{outline:3px solid #387967;outline-offset:3px}
+button.ld-tools-shortcut[hidden],body.ld-student-link .ld-tools-shortcut{display:none!important}
+.ld-tools-dock{display:flex;flex:0 0 auto;justify-content:flex-end;align-items:center;padding:8px 0;gap:8px;min-width:0}
+.round-commandbar .round-actions,#teacherNook>header,#vsTop{flex-wrap:wrap}
+@media(max-width:640px){
+ .round-commandbar .round-actions{justify-content:flex-start}
+ #teacherNook>header,#vsTop{row-gap:8px}
+ .ld-tools-dock{justify-content:flex-start}
+}
+</style>
+<script>
+(()=>{
+ const board=document.getElementById('hubPlayboard');
+ const menuLauncher=document.getElementById('openHubPlayboard');
+ const gameLauncher=document.getElementById('playboardFromGame');
+ const launcher=menuLauncher||gameLauncher;
+ if(!board||!launcher)return;
+ const studentInvite=location.hash.startsWith('#ld=')||new URLSearchParams(location.hash.slice(1)).has('class');
+ if(studentInvite){
+   document.body.classList.add('ld-student-link');
+   return;
+ }
+ const launch=launcher.onclick;
+ let returnFocus;
+ board.addEventListener('close',()=>{
+   if(returnFocus?.isConnected)returnFocus.focus();
+   returnFocus=null;
+ });
+ function openTools(){
+   if(board.open)return;
+   returnFocus=document.activeElement;
+   launch.call(launcher);
+   document.getElementById('hubPlayboardBack')?.focus();
+ }
+ window.openClassroomTools=openTools;
+ function prepare(button){
+   button.type='button';
+   button.classList.add('ld-tools-shortcut');
+   button.textContent='Classroom Tools';
+   button.setAttribute('aria-haspopup','dialog');
+   button.setAttribute('aria-controls','hubPlayboard');
+   button.onclick=openTools;
+ }
+ function addShortcut(parent){
+   if(!parent||parent.querySelector('.ld-tools-shortcut'))return;
+   const button=document.createElement('button');
+   prepare(button);
+   parent.append(button);
+ }
+ for(const button of [menuLauncher,gameLauncher,document.getElementById('playboardFromLesson')]){
+   if(button)prepare(button);
+ }
+ const gameActions=document.querySelector('#playArea .round-actions');
+ if(gameActions&&gameLauncher)gameActions.append(gameLauncher);
+ addShortcut(document.querySelector('#teacherNook > header'));
+ addShortcut(document.getElementById('vsTop'));
+ function addDialogShortcut(dialog){
+   if(dialog===board||dialog.id==='lessonCoverDialog'||dialog.querySelector('.ld-tools-dock'))return;
+   const dock=document.createElement('div');
+   dock.className='ld-tools-dock';
+   addShortcut(dock);
+   dialog.prepend(dock);
+ }
+ document.querySelectorAll('dialog').forEach(addDialogShortcut);
+ new MutationObserver(mutations=>{
+   for(const mutation of mutations){
+     for(const node of mutation.addedNodes){
+       if(node.nodeType!==1)continue;
+       if(node.matches('dialog'))addDialogShortcut(node);
+       node.querySelectorAll('dialog').forEach(addDialogShortcut);
+     }
+   }
+ }).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
