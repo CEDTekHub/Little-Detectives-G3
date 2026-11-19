@@ -1023,11 +1023,11 @@ refreshButton();
 @media(prefers-reduced-motion:reduce){#ldItemFeedback.ld-pop{animation:none}}
 </style>
 <section id="ldHub" hidden aria-label="Live classroom multiplayer">
-<header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><button id="ldClassroomTools" class="ld-tools-shortcut" type="button" aria-haspopup="dialog" aria-controls="hubPlayboard">Classroom Tools</button><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
+<header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><div id="ldTeacherBankActions"></div><button id="ldClassroomTools" class="ld-tools-shortcut" type="button" aria-haspopup="dialog" aria-controls="hubPlayboard">Classroom Tools</button><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
 <div id="ldStatus" role="status" aria-live="polite">Choose a preview or connect Firebase to host a live class.</div>
 <div id="ldTeacher" class="ld-grid"><aside class="ld-stack"><section class="ld-card ld-stack"><h2>Class connection</h2><div id="ldDemoBanner" class="ld-banner" hidden>Preview only · These sessions work between tabs in this browser. Other iPads need Firebase.</div><label>Connection<select id="ldBackend"><option value="demo">Local preview · no account needed</option><option value="firebase">Firebase · live class</option></select></label><div id="ldFirebaseFields" class="ld-stack" hidden><label>Firebase Web API key<input id="ldApiKey" autocomplete="off" placeholder="AIza…"></label><label>Realtime Database URL<input id="ldDatabaseURL" type="url" placeholder="https://your-project-default-rtdb.asia-southeast1.firebasedatabase.app"></label><label>Teacher email<input id="ldEmail" type="email" autocomplete="username"></label><label>Teacher password<input id="ldPassword" type="password" autocomplete="current-password"></label><button id="ldLogin" class="ld-primary">Save connection & sign in</button><p class="ld-note">Use a teacher account created in your Firebase project. The supplied rules require its UID in the teacher allowlist. Never enter a service-account key.</p></div><p id="ldIdentity" class="ld-note">Local teacher preview</p><button id="ldLogout">Sign out</button></section><section class="ld-card ld-stack"><h2>Create a session</h2><label>Class / session title<input id="ldClass" maxlength="60" value="Grade 4 Detectives"></label><label>Student game<select id="ldGame"><option value="words">Round 1 · Stationery scan</option><option value="locations">Round 2 · Location scan</option><option value="quiz">QUIZ</option><option value="custom">Imported exam quiz</option></select></label><div id="ldQuizSettings" hidden><label>Quiz pace <select id="ldPace"><option value="student">Student-paced</option><option value="teacher">Teacher-paced · Live Quiz</option></select></label><label id="ldItemTimeField" hidden>Time per question <input id="ldItemSeconds" type="number" min="5" max="600" step="1" value="30" inputmode="numeric"> <span>seconds (60 = 1 minute)</span></label><label>Question order <select id="ldOrder"><option value="same">Worksheet order for everyone</option><option value="shared">Shuffle once · same order for everyone</option><option value="individual">Shuffle separately for each student</option></select></label></div><details id="ldExamTools"><summary>Import an exam</summary><label>Upload a text-based exam <input id="ldExamFile" type="file" accept=".docx,.pdf,.txt,.json"></label><p>Number each question. Label options A, B, C, etc. Add an Answer Key (1. B, 2. A) or put Answer: B below each question.</p><textarea id="ldExamText" rows="8" aria-label="Exam text or JSON" placeholder="Paste your exam here"></textarea><button id="ldExamParse">Convert & review</button><p id="ldExamStatus" role="status"></p><label>Quiz part <select id="ldExamPart"></select></label><button id="ldExamDownload" disabled>Download quiz JSON</button><button id="ldExamPrint" disabled>Print exam</button></details><label id="ldOverallLimit">Time limit<select id="ldLimit"><option value="180">3 minutes</option><option value="300" selected>5 minutes</option><option value="600">10 minutes</option><option value="0">No limit</option></select></label><label>Published hub URL<input id="ldBaseURL" type="url" placeholder="https://yourname.github.io/your-repository/"></label><button id="ldCreate" class="ld-primary">Create session</button><label>Reopen an existing session<input id="ldExisting" maxlength="12" placeholder="Session code"></label><button id="ldLoad">Load session</button></section></aside>
 <main class="ld-stack"><section id="ldNoSession" class="ld-card"><h2>Ready for your first live class?</h2><p>Create a preview session to explore the workflow now. Once Firebase is connected, students can scan your QR code, enter their names, and play simultaneously.</p><p>These two student games are added alongside your existing activities. Your slides, Teacher’s Nook, and original rounds remain teacher tools.</p></section><section id="ldSessionPanel" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><h2 id="ldSessionTitle"></h2><strong id="ldSessionState"></strong></div><div class="ld-row"><button id="ldStart" class="ld-primary">Start / Resume</button><button id="ldDisplay">Open live display</button><button id="ldPause">Pause</button><button id="ldEnd">End & publish scores</button><button id="ldExport">Download CSV</button><button id="ldPublish">Publish scores again</button></div><div class="ld-metrics"><span id="ldCount">0 players</span><span id="ldFinished">0 finished</span><span id="ldClock">Waiting</span></div><details open><summary>Invite students</summary><p id="ldCode"></p><canvas id="ldQR" hidden aria-label="Student session QR code"></canvas><input id="ldLink" readonly aria-label="Student link"><div class="ld-row"><button id="ldCopy">Copy student link</button><button id="ldOpenStudent">Open student preview</button><button id="ldShowQR">Show QR full screen</button><button id="ldDownloadQR">Download QR image</button></div><p id="ldQRNote" class="ld-note"></p></details><p class="ld-note" id="ldUpdated">Waiting for players.</p><div class="ld-table-wrap"><table><thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Answered</th><th>Active time</th><th>Joined</th><th>Last answer</th></tr></thead><tbody id="ldRows"></tbody></table></div><div class="ld-row"><button id="ldTeacherSound" aria-pressed="false">Sound off</button><label>Quiz volume <input id="ldTeacherVolume" type="range" min="0" max="100" value="35"></label></div><section id="ldPacedControls" hidden></section><details id="ldAnswerReview" hidden><summary>Check quiz answers</summary><label>Student<select id="ldReviewStudent"></select></label><ol id="ldReviewAnswers"></ol></details><p class="ld-note">Scores: 10 points per correct answer. Ties use less active time, then the final answer timestamp. Names may repeat; each device receives a separate player ID.</p><label><input id="ldShowRanks" type="checkbox" checked> Show rankings on teacher screen</label></section></main></div>
-<div id="ldStudentTools" hidden class="ld-student-tools"><button id="ldStudentFull" aria-label="Enter full screen" title="Full screen">⛶</button><button id="ldStudentSound" aria-pressed="false">Sound off</button><label>Volume <input id="ldStudentVolume" type="range" min="0" max="100" value="35"></label></div><main id="ldStudent" hidden><section id="ldJoinCard" class="ld-card ld-stack"><h2>Join the detective mission</h2><label id="ldCodeField">Session code<input id="ldJoinCode" maxlength="12" autocapitalize="characters"></label><label>Your name<input id="ldName" maxlength="40" autocomplete="nickname" placeholder="Type your name"></label><button id="ldJoin" class="ld-primary">Join mission</button><p class="ld-note" id="ldJoinHint">No student email or password needed. Use the teacher’s QR code on your iPad to carry the class connection automatically.</p></section><section id="ldWaiting" class="ld-card" hidden role="status"><h2>You’re on the team!</h2><p id="ldWaitingName"></p><p>Wait for your teacher to start the game.</p></section><section id="ldPlayCard" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><span id="ldStudentProgress"></span><span id="ldCountdown"></span></div><h2 id="ldQuestion"></h2><div id="ldQuizPanel" hidden><p id="ldQuizSection"></p><img id="ldQuizPicture" alt="Picture clue"><div id="ldQuizPrompt"><span id="ldQuizPrefix">It’s </span><span id="ldQuizBlank" aria-live="polite">Drop your answer here</span><span id="ldQuizSuffix">.</span></div></div><div id="ldScanStage" class="ld-scan-stage" tabindex="0" role="group" aria-label="Move your finger or arrow keys to scan the picture"><div id="ldRoom" class="ld-room"></div><div id="ldScanPicture" class="ld-scan-picture"></div><div class="ld-scanner"></div></div><div id="ldScanTools" class="ld-row" style="margin-top:10px"><span class="ld-note">Move your finger to scan · Arrow keys also move the lens</span><button id="ldRevealPicture">Show whole picture</button></div><div id="ldChoices" class="ld-choices"></div><button id="ldSubmit" class="ld-primary" disabled>Send answer</button><p id="ldStudentMessage" aria-live="polite"></p><div id="ldItemFeedback" hidden role="status"></div><section id="ldReceipt" hidden></section><div id="ldPersonalResult" hidden role="status"></div><button id="ldRetrySync" hidden>Retry saving answer</button></section></main>
+<div id="ldStudentTools" hidden class="ld-student-tools"><button id="ldStudentFull" aria-label="Enter full screen" title="Full screen">⛶</button><button id="ldStudentSound" aria-pressed="false">Sound off</button><label>Volume <input id="ldStudentVolume" type="range" min="0" max="100" value="35"></label></div><main id="ldStudent" hidden><section id="ldJoinCard" class="ld-card ld-stack"><h2>Join the detective mission</h2><label id="ldCodeField">Session code<input id="ldJoinCode" maxlength="12" autocapitalize="characters"></label><label>Your name<input id="ldName" maxlength="40" autocomplete="nickname" placeholder="Type your name"></label><button id="ldJoin" class="ld-primary">Join mission</button><p class="ld-note" id="ldJoinHint">No student email or password needed. Use the teacher’s QR code on your iPad to carry the class connection automatically.</p></section><section id="ldWaiting" class="ld-card" hidden role="status"><h2>You’re on the team!</h2><p id="ldWaitingName"></p><p>Wait for your teacher to start the game.</p></section><section id="ldPlayCard" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><span id="ldStudentProgress"></span><span id="ldCountdown"></span></div><h2 id="ldQuestion"></h2><div id="ldQuizPanel" hidden><p id="ldQuizSection"></p><img id="ldQuizPicture" alt="Picture clue"><div id="ldQuizPrompt"><span id="ldQuizPrefix">It’s </span><span id="ldQuizBlank" aria-live="polite">Drop your answer here</span><span id="ldQuizSuffix">.</span></div></div><div id="ldScanStage" class="ld-scan-stage" tabindex="0" role="group" aria-label="Move your finger or arrow keys to scan the picture"><div id="ldRoom" class="ld-room"></div><div id="ldScanPicture" class="ld-scan-picture"></div><div class="ld-scanner"></div></div><div id="ldScanTools" class="ld-row" style="margin-top:10px"><span class="ld-note">Move your finger to scan · Arrow keys also move the lens</span><button id="ldRevealPicture">Show whole picture</button></div><div id="ldChoices" class="ld-choices"></div><button id="ldSubmit" class="ld-primary" disabled>Send answer</button><p id="ldStudentMessage" aria-live="polite"></p><div id="ldItemFeedback" hidden role="status"></div><section id="ldReceipt" hidden></section><div id="ldPersonalResult" hidden role="status"></div><div id="ldStudentBankActions" hidden></div><button id="ldRetrySync" hidden>Retry saving answer</button></section></main>
 <div id="ldQRProjection" class="ld-qr-overlay" hidden role="dialog" aria-modal="true" aria-label="Student join QR code"><img id="ldProjectedQR" alt="Scan to join Little Detectives"><button id="ldCloseQR">Back to teacher dashboard</button></div>
 </section>
 
@@ -2404,7 +2404,7 @@ function elapsedAt(meta,at=now()){return Object.values(meta.timeline||{}).reduce
 function secondsLeft(meta){return meta.limitSeconds?Math.max(0,meta.limitSeconds-Math.floor(elapsedAt(meta)/1000)):Infinity}
 function formatTime(ms){const secs=Math.max(0,Math.floor(ms/1000));return Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')}
 function ranked(s,ks,ps){return Object.entries(ps||{}).map(([id,p])=>{const answers=Object.entries(p.answers||{}),at=answers.length?Math.max(...answers.map(([,a])=>a.at)):0;return {id,name:p.name||'Student',score:answers.reduce((sum,[q,a])=>sum+(ks[q]===a.choice?10:0),0),answered:answers.length,time:at?elapsedAt(s.meta,at):0,joinedAt:p.joinedAt,at}}).sort((a,b)=>b.score-a.score||b.answered-a.answered||a.time-b.time||a.at-b.at||a.id.localeCompare(b.id))}
-function setRole(next){if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldClassroomTools').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldStudentTools').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldWaiting').hidden=true;$('ldPlayCard').hidden=true;updateConnection()}
+function setRole(next){if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldClassroomTools').hidden=role!=='teacher';$('ldTeacherBankActions').hidden=role!=='teacher';$('ldStudentBankActions').hidden=true;$('ldStudent').hidden=role!=='student';$('ldStudentTools').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldWaiting').hidden=true;$('ldPlayCard').hidden=true;updateConnection()}
 function updateConnection(){$('ldFirebaseFields').hidden=backend!=='firebase';$('ldDemoBanner').hidden=backend!=='demo';$('ldBackend').value=backend;$('ldIdentity').textContent=backend==='demo'?'Local preview · no remote connection':auth?'Signed in · UID: '+auth.uid:'Firebase not signed in'}
 function open(next='teacher'){try{if(typeof pause==='function')pause()}catch{}ROOT.hidden=false;setRole(next);clearInterval(loop);clearInterval(clockLoop);loop=setInterval(()=>poll(),4000);clockLoop=setInterval(tick,500);status(backend==='demo'?'Preview mode: use another tab in this browser to try student play.':'Connect your Firebase project to begin.')}
 function close(){hideJoinQR();if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;ROOT.hidden=true;clearInterval(loop);clearInterval(clockLoop)}
@@ -2494,6 +2494,7 @@ function questionEntry(){
 }
 function img(name,className){const im=new Image();im.src=ASSETS.images[name];im.alt=name;im.className=className;im.draggable=false;return im}
 let renderedQuestion='';function renderStudent(){if(!self||!session)return;
+$('ldStudentBankActions').hidden=session.meta.state!=='ended';
 renderItemFeedback();
 const waiting=session.meta.state==='waiting';
 $('ldWaiting').hidden=!waiting;
@@ -2710,6 +2711,15 @@ function renderLiveDisplay(){
       window.openClassroomTools(()=>{if(projection&&!projection.closed)projection.focus?.()});
     };
     actions.append(tools);
+  }
+  if(typeof window.openPictureBank==='function'){
+    for(const [mode,label] of [['words','Word Bank'],['sentences','Sentence Bank']]){
+      action(label,()=>{
+        const projection=doc.defaultView;
+        window.focus?.();
+        window.openPictureBank(mode,()=>{if(projection&&!projection.closed)projection.focus?.()});
+      });
+    }
   }
   if(teacherPaced()&&!ended){
     action(quizSoundOn?'Sound on':'Sound off',run(async()=>{await toggleQuizSound();renderLiveDisplay()}));
@@ -3392,5 +3402,178 @@ button.ld-tools-shortcut[hidden],body.ld-student-link .ld-tools-shortcut{display
      }
    }
  }).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<style>
+#playArea:not(.search-focus) .layout{grid-template-columns:minmax(0,1fr) clamp(118px,12vw,185px)}
+#playArea #collection{grid-template-columns:minmax(0,1fr);gap:5px}
+#playArea #collection .wordcard{
+ display:flex;flex-direction:row;align-items:center;justify-content:flex-start;
+ gap:6px;width:100%;min-width:0;min-height:42px;padding:4px;
+ font:700 clamp(12px,1.35vw,21px)/1.15 Andika,system-ui,sans-serif;text-align:left;
+}
+#playArea #collection .wordcard img{width:clamp(28px,3.5vw,49px);height:clamp(29px,5.5vh,52px);object-fit:contain;flex:none;margin:0}
+#playArea #collection .wordcard span{min-width:0;overflow-wrap:anywhere}
+#playArea #collection .slot{min-height:clamp(36px,6vh,58px);font-size:22px}
+#playArea .notebook{padding:7px;min-width:0}
+#playArea .notebook h2{font-size:clamp(15px,1.7vw,22px);line-height:1.1}
+#playArea .sidefoot{display:flex;flex-wrap:wrap;gap:4px}
+#playArea .sidefoot button{max-width:100%;padding-inline:6px;font-size:clamp(12px,1.15vw,17px)}
+#playArea .round-commandbar .round-actions{flex-wrap:wrap}
+.ld-bank-buttons{display:inline-flex;flex:0 0 auto;align-items:center;gap:5px;max-width:100%}
+.ld-bank-buttons button{white-space:nowrap;font:700 14px/1.2 Andika,system-ui,sans-serif;padding:6px 9px;min-height:38px;margin:0}
+#ldHub .ld-bank-buttons button{font-size:14px;padding:6px 9px;min-height:38px}
+#missionBottomNav:has(.ld-bank-buttons){flex-wrap:wrap;max-width:calc(100% - 16px)!important}
+#missionBottomNav .ld-bank-buttons button{position:static;min-height:38px;font-size:14px}
+#review,#popup,#words,#pictureBankDialog{
+ box-sizing:border-box;width:min(94vw,1320px);max-width:none;max-height:92dvh;overflow:auto;
+}
+#review h2,#popup h2,#words h2,#pictureBankDialog h2{font:700 clamp(25px,3.4vw,48px)/1.2 Andika,system-ui,sans-serif;margin:0 0 12px}
+#review p,#popup .answer,#words p,#pictureBankDialog{font-family:Andika,system-ui,sans-serif;font-size:clamp(17px,2.15vw,29px)}
+#reviewBody.gallery,#wordGrid,#pictureBankCards{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px;
+}
+#reviewBody .wordcard,#wordGrid .wordcard{font:700 clamp(19px,2.6vw,36px)/1.2 Andika,system-ui,sans-serif;padding:12px}
+#reviewBody .wordcard img,#wordGrid .wordcard img{width:100%;height:clamp(85px,17vh,170px);object-fit:contain}
+#reviewBody:not(.gallery)>div{font:700 clamp(18px,2.3vw,31px)/1.25 Andika,system-ui,sans-serif!important;flex-wrap:wrap;padding:8px}
+#reviewBody:not(.gallery)>div>img{width:clamp(74px,11vw,144px)!important;height:clamp(74px,11vw,144px)!important;object-fit:contain}
+#popup .evidence{height:clamp(180px,40vh,360px)}
+#pictureBankDialog{border:1px solid #a9c8bb;border-radius:22px;padding:clamp(14px,2.5vw,30px);background:#f6fff8;color:#244844}
+#pictureBankDialog::backdrop{background:#112b32ab}
+#pictureBankDialog header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#pictureBankCards article{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid #c5dfcf;border-radius:14px;background:white;text-align:center}
+#pictureBankCards img{width:100%;height:clamp(80px,15vh,145px);object-fit:contain}
+#pictureBankCards p{margin:0;font-weight:700}
+#pictureBankCards .ld-bank-answer{min-height:2.5em}
+#pictureBankCards .ld-bank-buttons{align-self:center;flex-wrap:wrap;justify-content:center}
+#ldHub #ldPlayCard:has(#ldPersonalResult:not([hidden])){max-width:min(94vw,1320px);margin-inline:auto;width:100%}
+#ldHub #ldStudent:has(#ldPersonalResult:not([hidden])){max-width:min(96vw,1360px);width:100%}
+#ldHub #ldPersonalResult{font:700 clamp(21px,3vw,38px)/1.25 Andika,system-ui,sans-serif}
+#ldHub #ldReceipt .ld-review-card img{width:min(100%,310px);height:clamp(120px,22vh,230px)}
+@media(max-width:480px){
+ #playArea:not(.search-focus) .layout{grid-template-columns:minmax(0,1fr) 96px}
+ #playArea #collection .wordcard{gap:4px}
+ .ld-bank-buttons button,#ldHub .ld-bank-buttons button{font-size:13px;padding-inline:6px}
+}
+</style>
+<dialog id="pictureBankDialog" aria-labelledby="pictureBankTitle">
+ <header><h2 id="pictureBankTitle"></h2><button id="pictureBankClose" type="button">← Back to activity</button></header>
+ <div id="pictureBankCards"></div>
+</dialog>
+<script>
+(()=>{
+ const get=id=>document.getElementById(id);
+ const bank=get('pictureBankDialog');
+ const cards=get('pictureBankCards');
+ let origin, resume, returnTo, restoreParent;
+ const items=['eraser','book','marker','pen','pencil','ruler','box','desk','chair','pencil case','bag','bin'];
+ const examples=[
+   ['Where is the eraser?', 'It’s in the box.',22],
+   ['Where is the book?', 'It’s on the desk.',23],
+   ['Where is the marker?', 'It’s under the chair.',24],
+   ['Where is the pencil?', 'It’s in the pencil case.',25],
+   ['Where is the eraser?', 'It’s on the chair.',26],
+   ['Where is the ruler?', 'It’s under the desk.',27]
+ ];
+ const images=JSON.parse(get('ldQuizAssets').textContent);
+ function make(tag,text){
+   const node=document.createElement(tag);
+   if(text!==undefined)node.textContent=text;
+   return node;
+ }
+ function speakBank(phrase){
+   if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;
+   window.speechSynthesis.cancel();
+   const audio=new SpeechSynthesisUtterance(phrase);
+   audio.lang='en-US';
+   audio.rate=.85;
+   window.speechSynthesis.speak(audio);
+ }
+ function action(text,fn){
+   const button=make('button',text);
+   button.type='button';
+   button.onclick=fn;
+   return button;
+ }
+ function buildCard(src,alt,prompt,answer){
+   const card=make('article');
+   const picture=make('img');
+   picture.src=src;
+   picture.alt=alt;
+   card.append(picture,make('p',prompt));
+   const buttons=make('div');
+   buttons.className='ld-bank-buttons';
+   if(answer){
+     const line=make('p','Say your answer first.');
+     line.className='ld-bank-answer';
+     const reveal=action('Reveal',()=>{
+       const shown=reveal.getAttribute('aria-expanded')==='true';
+       reveal.setAttribute('aria-expanded',String(!shown));
+       reveal.textContent=shown?'Reveal':'Hide';
+       line.textContent=shown?'Say your answer first.':answer;
+     });
+     reveal.setAttribute('aria-expanded','false');
+     buttons.append(reveal,action('Listen',()=>speakBank(answer)));
+     card.append(line);
+   }else buttons.append(action('Listen',()=>speakBank(prompt)));
+   card.append(buttons);
+   cards.append(card);
+ }
+ function openBank(mode,onReturn){
+   if(bank.open)return;
+   origin=document.activeElement;
+   returnTo=onReturn;
+   resume=get('playArea')?.contains(origin)&&typeof phase!=='undefined'&&phase==='playing';
+   if(resume)pause();
+   const fullscreen=document.fullscreenElement;
+   restoreParent=fullscreen&&!fullscreen.contains(bank)?bank.parentElement:null;
+   if(restoreParent)fullscreen.append(bank);
+   cards.replaceChildren();
+   get('pictureBankTitle').textContent=mode==='words'?'Picture Word Bank':'Picture Sentence Bank';
+   if(mode==='words'){
+     for(const item of items)buildCard(image(item).src,item,item);
+   }else{
+     for(const item of items.slice(0,6)){
+       buildCard(image(item).src,item,'What is it?','It’s '+(item==='eraser'?'an ':'a ')+item+'.');
+     }
+     for(const [prompt,answer,index] of examples)buildCard(images[index],'Stationery location clue',prompt,answer);
+   }
+   bank.showModal();
+   get('pictureBankClose').focus();
+ }
+ window.openPictureBank=openBank;
+ get('pictureBankClose').onclick=()=>bank.close();
+ bank.addEventListener('close',()=>{
+   window.speechSynthesis?.cancel();
+   if(restoreParent)restoreParent.append(bank);
+   if(resume&&phase==='paused')get('startBtn')?.click();
+   if(origin?.isConnected)origin.focus({preventScroll:true});
+   returnTo?.();
+ });
+ function attach(parent){
+   if(!parent||parent.querySelector(':scope > [data-picture-banks]'))return;
+   const actions=make('div');
+   actions.className='ld-bank-buttons';
+   actions.dataset.pictureBanks='';
+   for(const [mode,label] of [['words','Word Bank'],['sentences','Sentence Bank']]){
+     const button=action(label,()=>openBank(mode));
+     button.setAttribute('aria-haspopup','dialog');
+     button.setAttribute('aria-controls',bank.id);
+     actions.append(button);
+   }
+   parent.append(actions);
+ }
+ const studentInvite=location.hash.startsWith('#ld=')||new URLSearchParams(location.hash.slice(1)).has('class');
+ if(!studentInvite){
+   const gameBar=document.querySelector('#playArea .round-actions')||document.querySelector('#playArea .playbar');
+   attach(gameBar);
+   if(gameBar&&get('wordsBtn'))get('wordsBtn').hidden=true;
+   for(const selector of [
+     '.home-dash-nav','#missionBottomNav','#teacherNook > header','#vsTop',
+     '#review .actions','#popup','#readingRound .rec-actions','#articleLesson','#prepLesson','#yesNoLesson',
+     '#ldTeacherBankActions'
+   ])attach(document.querySelector(selector));
+ }
+ attach(get('ldStudentBankActions'));
 })();
 </script>
