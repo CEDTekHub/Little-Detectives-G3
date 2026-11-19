@@ -977,14 +977,31 @@ refreshButton();
 </script>
 <style>
 #ldHub[hidden],#ldHub [hidden]{display:none!important}#ldHub{position:fixed;inset:0;z-index:200;background:radial-gradient(at top left,#d7f5ec,transparent 65%),#edf2fa;color:#224651;overflow:auto;padding:clamp(12px,2vw,28px);font-family:'Trebuchet MS',Arial,sans-serif}#ldHub *{box-sizing:border-box}#ldHub button,#ldHub input,#ldHub select{font:inherit;min-height:44px;border:1px solid #a7c8c4;border-radius:12px;padding:10px 14px;color:#234b56;background:#ffffffd9}#ldHub button{font-weight:bold;cursor:pointer}#ldHub button:disabled{opacity:.45;cursor:default}#ldHub .ld-primary{background:#246f68;color:white}#ldHub .ld-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}#ldHub h1{font-size:clamp(24px,3vw,38px);margin:0}#ldHub h2{font-size:25px;margin:0 0 14px}#ldHub p{line-height:1.5}#ldHub .ld-card{background:#ffffffbd;border:1px solid white;border-radius:22px;padding:20px;box-shadow:0 12px 40px #254c5912;backdrop-filter:blur(16px);min-width:0}#ldHub .ld-grid{display:grid;grid-template-columns:minmax(250px,340px) minmax(0,1fr);gap:16px;max-width:1500px;margin:auto}#ldHub .ld-stack{display:grid;gap:12px}#ldHub label{display:grid;gap:6px;font-size:17px}#ldHub .ld-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}#ldHub .ld-note{font-size:15px;color:#57717c}#ldHub .ld-banner{padding:10px 14px;background:#fff3d1;border-radius:12px;margin:0 0 16px}#ldHub #ldStatus{max-width:1500px;margin:0 auto 12px;padding:10px 14px;border-radius:12px;background:#e3eee9;min-height:42px}#ldHub #ldStatus[data-error=true]{background:#ffe2dc;color:#842e2a}#ldHub .ld-metrics{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}#ldHub .ld-metrics span{background:#e8f2f1;border-radius:12px;padding:12px;font-weight:bold}#ldHub .ld-table-wrap{overflow:auto}#ldHub table{border-collapse:collapse;width:100%;font-size:17px}#ldHub th,#ldHub td{padding:12px 9px;text-align:left;border-bottom:1px solid #d8e6e5;white-space:nowrap}#ldHub th{color:#51717b;font-size:14px}#ldHub #ldQR{display:block;width:min(280px,100%);height:auto;background:white;border-radius:8px;margin:12px auto}#ldHub #ldLink{width:100%;font-size:14px}#ldHub #ldStudent{max-width:1100px;margin:auto}#ldHub #ldQuestion{font-size:clamp(25px,3vw,40px);line-height:1.3;margin:8px 0 16px;text-align:center}#ldHub .ld-scan-stage{position:relative;height:clamp(230px,42vh,430px);border-radius:20px;overflow:hidden;touch-action:none;background:#142d40;isolation:isolate}#ldHub .ld-room{position:absolute;inset:0;background:center/cover;opacity:.36}#ldHub .ld-scan-picture{position:absolute;inset:0;clip-path:circle(95px at var(--sx,50%) var(--sy,50%));background:#cdece633}#ldHub .ld-scan-picture.revealed{clip-path:none}#ldHub .ld-scanner{position:absolute;left:var(--sx,50%);top:var(--sy,50%);width:190px;height:190px;transform:translate(-50%,-50%);border:3px solid #9effdf;box-shadow:0 0 22px #80ffe7;pointer-events:none;border-radius:50%;z-index:5}#ldHub .ld-scanner:after{content:'+';position:absolute;inset:0;display:grid;place-items:center;color:#abffe9;font-size:36px}#ldHub .ld-specimen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:210px;height:210px;object-fit:contain}#ldHub .ld-location{position:absolute;width:min(400px,85%);height:90%;left:50%;top:50%;transform:translate(-50%,-50%)}#ldHub .ld-anchor,#ldHub .ld-front{position:absolute;left:18%;top:25%;width:64%;height:60%;object-fit:contain;z-index:1}#ldHub .ld-small{position:absolute;left:39%;top:42%;width:25%;height:25%;object-fit:contain;z-index:2}#ldHub .ld-front{z-index:3;clip-path:inset(48% 0 0 0)}#ldHub .ld-location[data-prep=on] .ld-small{top:13%;left:39%;z-index:3}#ldHub .ld-location[data-prep=under] .ld-small{top:70%;left:40%;z-index:0}#ldHub .ld-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}#ldHub .ld-choices button{font-size:clamp(21px,2.5vw,30px);min-height:65px}#ldHub .ld-choices button[aria-pressed=true]{background:#236e67;color:white}#ldHub #ldStudentProgress{font-size:20px;font-weight:bold}#ldHub #ldCountdown{font-variant-numeric:tabular-nums;font-weight:bold;font-size:24px}#ldHub details{border-top:1px solid #d1e2df;padding-top:12px}#ldHub summary{cursor:pointer;font-weight:bold;padding:8px 0}#ldHub .ld-empty{padding:35px 12px;text-align:center;color:#67828b}@media(max-width:850px){#ldHub .ld-grid{grid-template-columns:1fr}#ldHub .ld-choices{grid-template-columns:repeat(2,minmax(0,1fr))}#ldHub .ld-card{padding:15px}}
+#ldHub[data-student-invite] .ld-header .ld-row{display:none}#ldHub[data-student-invite] .ld-header .ld-note{display:none}
+#ldHub #ldPersonalResult{margin:16px 0;padding:22px;background:#e1f5eb;border-radius:18px;text-align:center;font-size:clamp(24px,4vw,38px);font-weight:bold}
+#ldProjection[hidden]{display:none!important}#ldProjection{position:fixed;inset:0;z-index:205;overflow:auto;background:#102c39;color:#fff;padding:24px}
+#ldHub[data-student-invite]{display:grid;align-content:center;background:linear-gradient(#102c3977,#102c39aa),var(--ld-classroom) center/cover fixed}
+#ldHub[data-student-invite] .ld-header,#ldHub[data-student-invite] #ldStatus[data-error=false]{display:none}
+#ldHub[data-student-invite] #ldStudent{width:min(100%,750px)}
+#ldHub #ldJoinCard,#ldHub #ldWaiting{max-width:480px;margin:auto}
+#ldHub #ldWaiting{text-align:center;padding:clamp(24px,6vw,60px)}
+#ldHub #ldWaiting h2{font-size:clamp(26px,5vw,42px)}
+#ldHub .ld-qr-overlay{position:fixed;inset:0;z-index:210;display:grid;place-items:center;background:linear-gradient(#162c3955,#162c3955),var(--ld-classroom) center/cover}
+#ldHub .ld-qr-overlay img{width:min(58vw,68vh);height:auto;image-rendering:pixelated;border-radius:12px;box-shadow:0 14px 55px #0007}
+#ldHub .ld-qr-overlay button{position:absolute;right:16px;bottom:16px;opacity:0}
+#ldHub .ld-qr-overlay:hover button,#ldHub .ld-qr-overlay:focus-within button{opacity:1}
+@media(pointer:coarse){#ldHub .ld-qr-overlay button{opacity:1}}
 </style>
 <section id="ldHub" hidden aria-label="Live classroom multiplayer">
 <header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
 <div id="ldStatus" role="status" aria-live="polite">Choose a preview or connect Firebase to host a live class.</div>
 <div id="ldTeacher" class="ld-grid"><aside class="ld-stack"><section class="ld-card ld-stack"><h2>Class connection</h2><div id="ldDemoBanner" class="ld-banner" hidden>Preview only · These sessions work between tabs in this browser. Other iPads need Firebase.</div><label>Connection<select id="ldBackend"><option value="demo">Local preview · no account needed</option><option value="firebase">Firebase · live class</option></select></label><div id="ldFirebaseFields" class="ld-stack" hidden><label>Firebase Web API key<input id="ldApiKey" autocomplete="off" placeholder="AIza…"></label><label>Realtime Database URL<input id="ldDatabaseURL" type="url" placeholder="https://your-project-default-rtdb.asia-southeast1.firebasedatabase.app"></label><label>Teacher email<input id="ldEmail" type="email" autocomplete="username"></label><label>Teacher password<input id="ldPassword" type="password" autocomplete="current-password"></label><button id="ldLogin" class="ld-primary">Save connection & sign in</button><p class="ld-note">Use a teacher account created in your Firebase project. The supplied rules require its UID in the teacher allowlist. Never enter a service-account key.</p></div><p id="ldIdentity" class="ld-note">Local teacher preview</p><button id="ldLogout">Sign out</button></section><section class="ld-card ld-stack"><h2>Create a session</h2><label>Class / session title<input id="ldClass" maxlength="60" value="Grade 4 Detectives"></label><label>Student game<select id="ldGame"><option value="words">Round 1 · Stationery scan</option><option value="locations">Round 2 · Location scan</option></select></label><label>Time limit<select id="ldLimit"><option value="180">3 minutes</option><option value="300" selected>5 minutes</option><option value="600">10 minutes</option><option value="0">No limit</option></select></label><label>Published hub URL<input id="ldBaseURL" type="url" placeholder="https://yourname.github.io/your-repository/"></label><button id="ldCreate" class="ld-primary">Create session</button><label>Reopen an existing session<input id="ldExisting" maxlength="12" placeholder="Session code"></label><button id="ldLoad">Load session</button></section></aside>
-<main class="ld-stack"><section id="ldNoSession" class="ld-card"><h2>Ready for your first live class?</h2><p>Create a preview session to explore the workflow now. Once Firebase is connected, students can scan your QR code, enter their names, and play simultaneously.</p><p>These two student games are added alongside your existing activities. Your slides, Teacher’s Nook, and original rounds remain teacher tools.</p></section><section id="ldSessionPanel" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><h2 id="ldSessionTitle"></h2><strong id="ldSessionState"></strong></div><div class="ld-row"><button id="ldStart" class="ld-primary">Start / Resume</button><button id="ldPause">Pause</button><button id="ldEnd">End & publish scores</button><button id="ldExport">Download CSV</button><button id="ldPublish">Publish scores again</button></div><div class="ld-metrics"><span id="ldCount">0 players</span><span id="ldFinished">0 finished</span><span id="ldClock">Waiting</span></div><details open><summary>Invite students</summary><p id="ldCode"></p><canvas id="ldQR" hidden aria-label="Student session QR code"></canvas><input id="ldLink" readonly aria-label="Student link"><div class="ld-row"><button id="ldCopy">Copy student link</button><button id="ldOpenStudent">Open student preview</button><button id="ldDownloadQR">Download QR image</button></div><p id="ldQRNote" class="ld-note"></p></details><p class="ld-note" id="ldUpdated">Waiting for players.</p><div class="ld-table-wrap"><table><thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Answered</th><th>Active time</th><th>Joined</th><th>Last answer</th></tr></thead><tbody id="ldRows"></tbody></table></div><p class="ld-note">Scores: 10 points per correct answer. Ties use less active time, then the final answer timestamp. Names may repeat; each device receives a separate player ID.</p><label><input id="ldShowRanks" type="checkbox" checked> Show rankings on teacher screen</label></section></main></div>
-<main id="ldStudent" hidden><section id="ldJoinCard" class="ld-card ld-stack"><h2>Join the detective mission</h2><label>Session code<input id="ldJoinCode" maxlength="12" autocapitalize="characters"></label><label>Your name<input id="ldName" maxlength="40" autocomplete="nickname" placeholder="Type your name"></label><button id="ldJoin" class="ld-primary">Join mission</button><p class="ld-note">No student email or password needed. Use the teacher’s QR code on your iPad to carry the class connection automatically.</p></section><section id="ldPlayCard" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><span id="ldStudentProgress"></span><span id="ldCountdown"></span></div><h2 id="ldQuestion"></h2><div id="ldScanStage" class="ld-scan-stage" tabindex="0" role="group" aria-label="Move your finger or arrow keys to scan the picture"><div id="ldRoom" class="ld-room"></div><div id="ldScanPicture" class="ld-scan-picture"></div><div class="ld-scanner"></div></div><div class="ld-row" style="margin-top:10px"><span class="ld-note">Move your finger to scan · Arrow keys also move the lens</span><button id="ldRevealPicture">Show whole picture</button></div><div id="ldChoices" class="ld-choices"></div><button id="ldSubmit" class="ld-primary" disabled>Send answer</button><p id="ldStudentMessage" aria-live="polite"></p><button id="ldRetrySync" hidden>Retry saving answer</button></section></main>
+<main class="ld-stack"><section id="ldNoSession" class="ld-card"><h2>Ready for your first live class?</h2><p>Create a preview session to explore the workflow now. Once Firebase is connected, students can scan your QR code, enter their names, and play simultaneously.</p><p>These two student games are added alongside your existing activities. Your slides, Teacher’s Nook, and original rounds remain teacher tools.</p></section><section id="ldSessionPanel" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><h2 id="ldSessionTitle"></h2><strong id="ldSessionState"></strong></div><div class="ld-row"><button id="ldStart" class="ld-primary">Start / Resume</button><button id="ldDisplay">Open live display</button><button id="ldPause">Pause</button><button id="ldEnd">End & publish scores</button><button id="ldExport">Download CSV</button><button id="ldPublish">Publish scores again</button></div><div class="ld-metrics"><span id="ldCount">0 players</span><span id="ldFinished">0 finished</span><span id="ldClock">Waiting</span></div><details open><summary>Invite students</summary><p id="ldCode"></p><canvas id="ldQR" hidden aria-label="Student session QR code"></canvas><input id="ldLink" readonly aria-label="Student link"><div class="ld-row"><button id="ldCopy">Copy student link</button><button id="ldOpenStudent">Open student preview</button><button id="ldShowQR">Show QR full screen</button><button id="ldDownloadQR">Download QR image</button></div><p id="ldQRNote" class="ld-note"></p></details><p class="ld-note" id="ldUpdated">Waiting for players.</p><div class="ld-table-wrap"><table><thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Answered</th><th>Active time</th><th>Joined</th><th>Last answer</th></tr></thead><tbody id="ldRows"></tbody></table></div><p class="ld-note">Scores: 10 points per correct answer. Ties use less active time, then the final answer timestamp. Names may repeat; each device receives a separate player ID.</p><label><input id="ldShowRanks" type="checkbox" checked> Show rankings on teacher screen</label></section></main></div>
+<main id="ldStudent" hidden><section id="ldJoinCard" class="ld-card ld-stack"><h2>Join the detective mission</h2><label id="ldCodeField">Session code<input id="ldJoinCode" maxlength="12" autocapitalize="characters"></label><label>Your name<input id="ldName" maxlength="40" autocomplete="nickname" placeholder="Type your name"></label><button id="ldJoin" class="ld-primary">Join mission</button><p class="ld-note" id="ldJoinHint">No student email or password needed. Use the teacher’s QR code on your iPad to carry the class connection automatically.</p></section><section id="ldWaiting" class="ld-card" hidden role="status"><h2>You’re on the team!</h2><p id="ldWaitingName"></p><p>Wait for your teacher to start the game.</p></section><section id="ldPlayCard" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><span id="ldStudentProgress"></span><span id="ldCountdown"></span></div><h2 id="ldQuestion"></h2><div id="ldScanStage" class="ld-scan-stage" tabindex="0" role="group" aria-label="Move your finger or arrow keys to scan the picture"><div id="ldRoom" class="ld-room"></div><div id="ldScanPicture" class="ld-scan-picture"></div><div class="ld-scanner"></div></div><div class="ld-row" style="margin-top:10px"><span class="ld-note">Move your finger to scan · Arrow keys also move the lens</span><button id="ldRevealPicture">Show whole picture</button></div><div id="ldChoices" class="ld-choices"></div><button id="ldSubmit" class="ld-primary" disabled>Send answer</button><p id="ldStudentMessage" aria-live="polite"></p><div id="ldPersonalResult" hidden role="status"></div><button id="ldRetrySync" hidden>Retry saving answer</button></section></main>
+<div id="ldQRProjection" class="ld-qr-overlay" hidden role="dialog" aria-modal="true" aria-label="Student join QR code"><img id="ldProjectedQR" alt="Scan to join Little Detectives"><button id="ldCloseQR">Back to teacher dashboard</button></div>
 </section>
+
+<section id="ldProjection" hidden aria-label="Class live display"></section>
 
 <script id="ldBundledQR">
 /* QRCode for JavaScript, copyright 2009 Kazuhiko Arase. MIT licensed. Bundled from qrcode-terminal. */
@@ -2264,40 +2281,274 @@ function elapsedAt(meta,at=now()){return Object.values(meta.timeline||{}).reduce
 function secondsLeft(meta){return meta.limitSeconds?Math.max(0,meta.limitSeconds-Math.floor(elapsedAt(meta)/1000)):Infinity}
 function formatTime(ms){const secs=Math.max(0,Math.floor(ms/1000));return Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')}
 function ranked(s,ks,ps){return Object.entries(ps||{}).map(([id,p])=>{const answers=Object.entries(p.answers||{}),at=answers.length?Math.max(...answers.map(([,a])=>a.at)):0;return {id,name:p.name||'Student',score:answers.reduce((sum,[q,a])=>sum+(ks[q]===a.choice?10:0),0),answered:answers.length,time:at?elapsedAt(s.meta,at):0,joinedAt:p.joinedAt,at}}).sort((a,b)=>b.score-a.score||b.answered-a.answered||a.time-b.time||a.at-b.at||a.id.localeCompare(b.id))}
-function setRole(next){role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldPlayCard').hidden=true;updateConnection()}
+function setRole(next){if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldWaiting').hidden=true;$('ldPlayCard').hidden=true;updateConnection()}
 function updateConnection(){$('ldFirebaseFields').hidden=backend!=='firebase';$('ldDemoBanner').hidden=backend!=='demo';$('ldBackend').value=backend;$('ldIdentity').textContent=backend==='demo'?'Local preview · no remote connection':auth?'Signed in · UID: '+auth.uid:'Firebase not signed in'}
 function open(next='teacher'){try{if(typeof pause==='function')pause()}catch{}ROOT.hidden=false;setRole(next);clearInterval(loop);clearInterval(clockLoop);loop=setInterval(()=>poll(),4000);clockLoop=setInterval(tick,500);status(backend==='demo'?'Preview mode: use another tab in this browser to try student play.':'Connect your Firebase project to begin.')}
-function close(){ROOT.hidden=true;clearInterval(loop);clearInterval(clockLoop)}
+function close(){hideJoinQR();if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();$('ldProjection').hidden=true;ROOT.hidden=true;clearInterval(loop);clearInterval(clockLoop)}
 async function teacherReady(){if(backend==='demo'){auth={uid:'preview-teacher'};return}if(!auth)throw Error('Sign in to Firebase before creating or loading a class session.');await syncClock();const allowed=await db('ldTeachers/'+auth.uid);if(allowed!==true)throw Error('Add this teacher UID to ldTeachers in Firebase: '+auth.uid)}
-async function createSession(){await teacherReady();const base=$('ldBaseURL').value.trim();if(backend==='firebase'&&!/^https:\/\//.test(base))throw Error('Enter your published HTTPS GitHub Pages URL first.');const {questions,answerKeys}=buildQuestions($('ldGame').value);sessionId=uid().slice(0,12).toUpperCase();const title=$('ldClass').value.trim()||'Detective mission';const data={owner:auth.uid,meta:{title,game:$('ldGame').value,limitSeconds:Number($('ldLimit').value),state:'waiting',createdAt:stamp,updatedAt:stamp},questions};await db('ldSessions/'+sessionId,'PUT',data);await db('ldAnswerKeys/'+sessionId,'PUT',answerKeys);$('ldExisting').value=sessionId;await loadSession(sessionId);status('Session created. Students can join now; press Start when everyone is ready.')}
+async function createSession(){await teacherReady();const base=$('ldBaseURL').value.trim();if(backend==='firebase'&&!/^https:\/\//.test(base))throw Error('Enter your published HTTPS GitHub Pages URL first.');const {questions,answerKeys}=buildQuestions($('ldGame').value);sessionId=uid().slice(0,12).toUpperCase();const title=$('ldClass').value.trim()||'Detective mission';const data={owner:auth.uid,meta:{title,game:$('ldGame').value,limitSeconds:Number($('ldLimit').value),state:'waiting',createdAt:stamp,updatedAt:stamp},questions};await db('ldSessions/'+sessionId,'PUT',data);await db('ldAnswerKeys/'+sessionId,'PUT',answerKeys);$('ldExisting').value=sessionId;await loadSession(sessionId);status('Session created. Students can join now; press Start when everyone is ready.');if(backend==='firebase')showJoinQR()}
 async function loadSession(id){await teacherReady();id=id.trim().toUpperCase();if(!/^[A-F0-9]{12}$/.test(id))throw Error('Use the 12-character session code.');const s=await db('ldSessions/'+id);if(!s)throw Error('Session not found.');if(s.owner!==auth.uid)throw Error('This session belongs to another teacher.');const k=await db('ldAnswerKeys/'+id);if(!k)throw Error('Answer key missing. Create a new session.');session=s;sessionId=id;keys=k;players=await db('ldPlayers/'+id)||{};$('ldNoSession').hidden=true;$('ldSessionPanel').hidden=false;renderDashboard();makeInvite()}
-async function control(state){if(!session)throw Error('Create or load a session first.');const fresh=await db('ldSessions/'+sessionId);const m=fresh.meta;if(m.state==='ended')throw Error('This session is finished. Create a new session to play again.');if(state==='live'&&secondsLeft(m)<=0)throw Error('Time is up. End this session and create a new one.');if(m.state===state)return;const timeline={...(m.timeline||{})};if(m.state==='live'){const last=Object.keys(timeline).find(k=>!timeline[k].end);if(last)timeline[last]={...timeline[last],end:stamp}}if(state==='live')timeline['r'+Object.keys(timeline).length]={start:stamp};const patch={state,updatedAt:stamp,...(Object.keys(timeline).length?{timeline}:{})};if(state==='live'){patch.startedAt=stamp;patch.elapsedMs=elapsedAt(m)}await db('ldSessions/'+sessionId+'/meta','PATCH',patch);session=await db('ldSessions/'+sessionId);players=await db('ldPlayers/'+sessionId)||{};if(state==='ended')await publishResults();renderDashboard();status(state==='live'?'Mission started.':state==='paused'?'Mission paused for everyone.':'Mission ended. Scores published.')}
+let changingState=false;
+async function control(state){
+  if(changingState)return;
+  changingState=true;
+  try{await updateSessionState(state)}finally{changingState=false}
+}
+async function updateSessionState(state){if(!session)throw Error('Create or load a session first.');const fresh=await db('ldSessions/'+sessionId);const m=fresh.meta;if(m.state==='ended'){if(state==='ended')return;throw Error('This session is finished. Create a new session to play again.')}if(state==='live'&&secondsLeft(m)<=0)throw Error('Time is up. End this session and create a new one.');if(m.state===state)return;const timeline={...(m.timeline||{})};if(m.state==='live'){const last=Object.keys(timeline).find(k=>!timeline[k].end);if(last)timeline[last]={...timeline[last],end:stamp}}if(state==='live')timeline['r'+Object.keys(timeline).length]={start:stamp};const patch={state,updatedAt:stamp,...(Object.keys(timeline).length?{timeline}:{})};if(state==='live'){patch.startedAt=stamp;patch.elapsedMs=elapsedAt(m)}await db('ldSessions/'+sessionId+'/meta','PATCH',patch);session=await db('ldSessions/'+sessionId);players=await db('ldPlayers/'+sessionId)||{};if(state==='ended')await publishResults();renderDashboard();status(state==='live'?'Mission started.':state==='paused'?'Mission paused for everyone.':'Mission ended. Scores published.')}
 async function publishResults(){if(!session||role!=='teacher')return;const rows=ranked(session,keys,players),total=Object.keys(session.questions).length;await db('ldResults/'+sessionId,'PUT',Object.fromEntries(rows.map((r,i)=>[r.id,{score:r.score,answered:r.answered,total,rank:i+1,activeMs:r.time,publishedAt:stamp}])))}
 function date(t){return t?new Date(t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'—'}
-function renderDashboard(){if(!session)return;$('ldSessionTitle').textContent=session.meta.title;$('ldSessionState').textContent=session.meta.state.toUpperCase();$('ldCode').textContent='Session code: '+sessionId;const rows=ranked(session,keys,players),total=Object.keys(session.questions).length;$('ldCount').textContent=rows.length+' players';$('ldFinished').textContent=rows.filter(r=>r.answered===total).length+' finished';$('ldRows').replaceChildren();for(const [i,r]of rows.entries()){const tr=document.createElement('tr');for(const value of [$('ldShowRanks').checked?i+1:'—',r.name,r.score+' / '+total*10,r.answered+' / '+total,formatTime(r.time),date(r.joinedAt),date(r.at)]){const td=document.createElement('td');td.textContent=String(value);tr.append(td)}$('ldRows').append(tr)}if(!rows.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.className='ld-empty';td.textContent='No players yet. Share the session link to invite your class.';tr.append(td);$('ldRows').append(tr)}$('ldUpdated').textContent='Last synced '+date(now())+' · Updates every 4 seconds while this screen is open.';$('ldPublish').disabled=session.meta.state!=='ended';$('ldStart').disabled=session.meta.state==='live'||session.meta.state==='ended';$('ldPause').disabled=session.meta.state!=='live';$('ldEnd').disabled=session.meta.state==='ended';tick()}
+function renderDashboard(){if(!session)return;renderLiveDisplay();$('ldSessionTitle').textContent=session.meta.title;$('ldSessionState').textContent=session.meta.state.toUpperCase();$('ldCode').textContent='Session code: '+sessionId;const rows=ranked(session,keys,players),total=Object.keys(session.questions).length;$('ldCount').textContent=rows.length+' players';$('ldFinished').textContent=rows.filter(r=>r.answered===total).length+' finished';$('ldRows').replaceChildren();for(const [i,r]of rows.entries()){const tr=document.createElement('tr');for(const value of [$('ldShowRanks').checked?i+1:'—',r.name,r.score+' / '+total*10,r.answered+' / '+total,formatTime(r.time),date(r.joinedAt),date(r.at)]){const td=document.createElement('td');td.textContent=String(value);tr.append(td)}$('ldRows').append(tr)}if(!rows.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.className='ld-empty';td.textContent='No players yet. Share the session link to invite your class.';tr.append(td);$('ldRows').append(tr)}$('ldUpdated').textContent='Last synced '+date(now())+' · Updates every 4 seconds while this screen is open.';$('ldPublish').disabled=session.meta.state!=='ended';$('ldStart').disabled=session.meta.state==='live'||session.meta.state==='ended';$('ldPause').disabled=session.meta.state!=='live';$('ldEnd').disabled=session.meta.state==='ended';tick()}
 function inviteURL(){const base=($('ldBaseURL').value.trim()||location.href).split('#')[0];const u=new URL(base);if(!['https:','http:','file:'].includes(u.protocol))throw Error('Use a valid published website URL.');const payload={id:sessionId,demo:backend==='demo',...(backend==='firebase'?{cfg}: {})};u.hash='ld='+btoa(JSON.stringify(payload));return u.href}
-function makeInvite(){try{const link=inviteURL();$('ldLink').value=link;$('ldOpenStudent').textContent=backend==='demo'?'Open student preview tab':'Open student link';$('ldDownloadQR').disabled=backend==='demo';$('ldQR').hidden=backend==='demo';$('ldQRNote').textContent=backend==='demo'?'Preview sessions only sync in this browser. Connect Firebase to generate a QR code for separate iPads.':'Students scan this QR code with their iPad camera. Only the public Firebase configuration and session code are included.';if(backend==='firebase')drawQR(link)}catch(e){status(friendly(e),true)}}
+function makeInvite(){try{const link=inviteURL();$('ldLink').value=link;$('ldOpenStudent').textContent=backend==='demo'?'Open student preview tab':'Open student link';$('ldDownloadQR').disabled=backend==='demo';$('ldShowQR').disabled=backend==='demo';$('ldQR').hidden=backend==='demo';$('ldQRNote').textContent=backend==='demo'?'Preview sessions only sync in this browser. Connect Firebase to generate a QR code for separate iPads.':'Students scan this QR code with their iPad camera. Only the public Firebase configuration and session code are included.';if(backend==='firebase')drawQR(link)}catch(e){status(friendly(e),true)}}
 function drawQR(text){const qr=new window.LDQRCode(-1,1);qr.addData(text);qr.make();const n=qr.getModuleCount(),scale=6,quiet=4,c=$('ldQR');c.width=c.height=(n+quiet*2)*scale;const ctx=c.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#102c37';for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(qr.isDark(y,x))ctx.fillRect((x+quiet)*scale,(y+quiet)*scale,scale,scale)}
 async function join(){if(busy)return;busy=true;try{const id=$('ldJoinCode').value.trim().toUpperCase(),name=$('ldName').value.trim();if(!/^[A-F0-9]{12}$/.test(id))throw Error('Enter your teacher’s 12-character session code.');if(!name||name.length>40)throw Error('Enter your name (up to 40 characters).');if(backend==='demo'){let player=sessionStorage.getItem('ld-preview-student');if(!player){player=uid();sessionStorage.setItem('ld-preview-student',player)}auth={uid:player}}else{if(!auth)await signIn();await syncClock()}const s=await db('ldSessions/'+id);if(!s)throw Error('Session not found. Scan the teacher’s current QR code.');let p=await db('ldPlayers/'+id+'/'+auth.uid);if(!p){if(!['waiting','live'].includes(s.meta.state))throw Error('This mission is not accepting new players.');await db('ldPlayers/'+id+'/'+auth.uid,'PUT',{name,joinedAt:stamp});p=await db('ldPlayers/'+id+'/'+auth.uid)}session=s;sessionId=id;self=p;choice=null;try{pending=JSON.parse(localStorage.getItem(pendingKey())||'null')}catch{pending=null}sessionStorage.setItem('ld-last-student:'+cfg.databaseURL,id);localStorage.setItem('ld-display-name',self.name);$('ldJoinCard').hidden=true;$('ldPlayCard').hidden=false;try{await flushPending()}finally{renderStudent()}status('Joined as '+self.name+'. Keep this tab open during the mission.')}finally{busy=false}}
 function pendingKey(){return 'ld-unsent:'+backend+':'+sessionId+':'+auth.uid}
 function questionEntry(){return Object.entries(session.questions).sort(([a],[b])=>a.localeCompare(b)).find(([id])=>!self.answers?.[id])}
 function img(name,className){const im=new Image();im.src=ASSETS.images[name];im.alt=name;im.className=className;im.draggable=false;return im}
-let renderedQuestion='';function renderStudent(){if(!self||!session)return;const count=Object.keys(self.answers||{}).length,total=Object.keys(session.questions).length;$('ldStudentProgress').textContent=self.name+' · '+count+' / '+total+' answers saved';const state=session.meta.state,entry=questionEntry(),playing=state==='live'&&secondsLeft(session.meta)>0;
+let renderedQuestion='';function renderStudent(){if(!self||!session)return;
+const waiting=session.meta.state==='waiting';
+$('ldWaiting').hidden=!waiting;
+$('ldPlayCard').hidden=waiting;
+if(waiting){$('ldWaitingName').textContent=self.name;return}
+$('ldPersonalResult').hidden=true;const count=Object.keys(self.answers||{}).length,total=Object.keys(session.questions).length;$('ldStudentProgress').textContent=self.name+' · '+count+' / '+total+' answers saved';const state=session.meta.state,entry=questionEntry(),playing=state==='live'&&secondsLeft(session.meta)>0;
 $('ldSubmit').disabled=!playing||!choice||!!pending;$('ldRetrySync').hidden=!pending;$('ldScanStage').hidden=!entry;$('ldChoices').hidden=!entry;$('ldRevealPicture').hidden=!entry;$('ldSubmit').hidden=!entry;
 if(!entry){$('ldQuestion').textContent='Mission complete!';$('ldStudentMessage').textContent='All answers are saved. Your teacher will publish the scores when the session ends.'}else if(state==='waiting'){$('ldQuestion').textContent='You’re on the team!';$('ldStudentMessage').textContent='Wait for your teacher to start.';$('ldScanStage').hidden=$('ldChoices').hidden=$('ldRevealPicture').hidden=$('ldSubmit').hidden=true}else{const [id,q]=entry;$('ldQuestion').textContent=q.prompt;if(renderedQuestion!==sessionId+id){renderedQuestion=sessionId+id;choice=null;$('ldChoices').replaceChildren();for(const [k,text]of Object.entries(q.choices)){const b=document.createElement('button');b.textContent=text;b.setAttribute('aria-pressed','false');b.onclick=()=>{choice=k;for(const c of $('ldChoices').children)c.setAttribute('aria-pressed',String(c===b));renderStudent()};$('ldChoices').append(b)}const pic=$('ldScanPicture');pic.classList.remove('revealed');pic.replaceChildren();$('ldRoom').style.backgroundImage='url("'+ASSETS.bg+'")';if(session.meta.game==='words')pic.append(img(q.item,'ld-specimen'));else{const d=document.createElement('div');d.className='ld-location';d.dataset.prep=q.prep;d.append(img(q.anchor,'ld-anchor'),img(q.item,'ld-small'));if(q.prep==='in')d.append(img(q.anchor,'ld-front'));pic.append(d)}}for(const b of $('ldChoices').children)b.disabled=!playing||!!pending;$('ldStudentMessage').textContent=pending?'Answer saved on this device; waiting to sync.':state==='paused'?'Teacher paused the mission. Your progress is saved.':state==='ended'?'This mission has ended.':!playing?'Time is up. Waiting for final results.':'Scan the picture, choose your answer, then press Send answer.';$('ldSubmit').disabled=!playing||!choice||!!pending}
-if(state==='ended')db('ldResults/'+sessionId+'/'+auth.uid).then(r=>{if(r)$('ldStudentMessage').textContent='Your score: '+r.score+' / '+r.total*10+' · Rank '+r.rank+' · '+formatTime(r.activeMs)+' active time.'}).catch(()=>{});tick()}
+if(state==='ended'){
+  $('ldQuestion').textContent='Round finished!';
+  $('ldScanStage').hidden=$('ldChoices').hidden=$('ldRevealPicture').hidden=$('ldSubmit').hidden=true;
+  const resultSession=sessionId;
+  db('ldResults/'+sessionId+'/'+auth.uid).then(result=>{
+    if(!result||sessionId!==resultSession)return;
+    const message='Your score: '+result.score+' / '+result.total*10+' · Rank '+result.rank;
+    $('ldStudentMessage').textContent=message+' · '+formatTime(result.activeMs)+' active time.';
+    $('ldPersonalResult').textContent=message;
+    $('ldPersonalResult').hidden=false;
+  }).catch(()=>{});
+}
+tick()}
 async function sendAnswer(){if(busy||pending||!choice||!session||session.meta.state!=='live')return;const entry=questionEntry();if(!entry)return;busy=true;try{pending={q:entry[0],choice};localStorage.setItem(pendingKey(),JSON.stringify(pending));$('ldSubmit').disabled=true;await flushPending();choice=null;renderStudent()}finally{busy=false;renderStudent()}}
 async function flushPending(){if(!pending||!session||session.meta.state!=='live'||secondsLeft(session.meta)<=0)return;const existing=await db('ldPlayers/'+sessionId+'/'+auth.uid+'/answers/'+pending.q);if(!existing)await db('ldPlayers/'+sessionId+'/'+auth.uid+'/answers/'+pending.q,'PUT',{choice:pending.choice,at:stamp});self=await db('ldPlayers/'+sessionId+'/'+auth.uid);localStorage.removeItem(pendingKey());pending=null;choice=null;status('Answer saved. Your teacher can see your progress.')}
-async function poll(){if(ROOT.hidden||!sessionId||polling||busy)return;polling=true;try{const s=await db('ldSessions/'+sessionId);if(!s)throw Error('This session is no longer available.');session=s;if(role==='teacher'){players=await db('ldPlayers/'+sessionId)||{};renderDashboard();if(session.meta.state==='live'&&secondsLeft(session.meta)<=0)await control('ended')}else{self=await db('ldPlayers/'+sessionId+'/'+auth.uid);await flushPending();renderStudent()}}catch(e){status(friendly(e),true)}finally{polling=false}}
-function tick(){if(!session)return;const left=secondsLeft(session.meta),text=left===Infinity?'No time limit':formatTime(left*1000);$('ldClock').textContent=session.meta.state==='waiting'?'Waiting to start':text+' · '+session.meta.state;$('ldCountdown').textContent=text;if(role==='student'&&session.meta.state==='live'&&left<=0){$('ldSubmit').disabled=true;for(const b of $('ldChoices').children)b.disabled=true}}
+async function poll(){if(ROOT.hidden||!sessionId||polling||busy)return;polling=true;try{const s=await db('ldSessions/'+sessionId);if(!s)throw Error('This session is no longer available.');session=s;if(role==='teacher'){
+  players=await db('ldPlayers/'+sessionId)||{};
+  renderDashboard();
+  const participants=Object.values(players);
+  const total=Object.keys(session.questions).length;
+  const everyoneFinished=participants.length>0 && participants.every(player=>Object.keys(player.answers||{}).length===total);
+  if(session.meta.state==='live'&&(everyoneFinished||secondsLeft(session.meta)<=0))await control('ended');
+}else{self=await db('ldPlayers/'+sessionId+'/'+auth.uid);await flushPending();renderStudent()}}catch(e){status(friendly(e),true)}finally{polling=false}}
+function tick(){if(!session)return;updateDisplayClock();const left=secondsLeft(session.meta),text=left===Infinity?'No time limit':formatTime(left*1000);$('ldClock').textContent=session.meta.state==='waiting'?'Waiting to start':text+' · '+session.meta.state;$('ldCountdown').textContent=text;if(role==='student'&&session.meta.state==='live'&&left<=0){$('ldSubmit').disabled=true;for(const b of $('ldChoices').children)b.disabled=true}}
 function download(name,text,type){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([text],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
 function exportCSV(){if(!session)return;const rows=ranked(session,keys,players);const safe=v=>{let t=String(v??'');if(/^[=+@\-\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};const all=[['session','class','player_id','rank','name','score','answered','active_seconds','joined_at','last_answer_at'],...rows.map((r,i)=>[sessionId,session.meta.title,r.id,i+1,r.name,r.score,r.answered,Math.floor(r.time/1000),new Date(r.joinedAt).toISOString(),r.at?new Date(r.at).toISOString():''])];download('detectives-'+sessionId+'.csv','\uFEFF'+all.map(r=>r.map(safe).join(',')).join('\r\n'),'text/csv;charset=utf-8')}
+let liveDisplay=null;
+let displayedSession='';
+let announcedSession='';
+let displayAudio=null;
+let soundEnabled=true;
+const displayCss=`
+  .ld-display{font:18px/1.45 'Trebuchet MS',sans-serif;color:#f8fcff;background:#102c39;min-height:100vh;padding:clamp(18px,4vw,54px);box-sizing:border-box}
+  .ld-display *{box-sizing:border-box}
+  .ld-display h1{font-size:clamp(32px,5vw,66px);margin:0;color:#fff}
+  .ld-display p{margin:8px 0 18px;color:#c3e4df}
+  .ld-display button{font:inherit;font-weight:bold;background:#b0f1d7;color:#163c38;border:0;border-radius:10px;padding:9px 14px;cursor:pointer}
+  .ld-display .display-actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+  .ld-display .display-podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
+  .ld-display .display-medal{background:#254553;border:2px solid #6cb8ad;border-radius:16px;padding:18px;overflow-wrap:anywhere}
+  .ld-display .display-medal:first-child{border-color:#ffd575;background:#624b23}
+  .ld-display .display-medal strong{display:block;font-size:26px}
+  .ld-display .display-table{overflow:auto}
+  .ld-display table{border-collapse:collapse;width:100%;color:#fff}
+  .ld-display th,.ld-display td{text-align:left;padding:10px;border-bottom:1px solid #3e6370}
+  .ld-display .display-answer{white-space:nowrap;color:#b0f1d7;letter-spacing:4px}
+`;
+function openLiveDisplay(){
+  if(!session)return;
+  try{
+    const Audio=window.AudioContext||window.webkitAudioContext;
+    if(Audio){displayAudio??=new Audio();displayAudio.resume().catch(()=>{})}
+  }catch{}
+  if(!liveDisplay||liveDisplay.closed){
+    try{liveDisplay=window.open('','ldTeacherDisplay','popup,width=1080,height=780')}catch{}
+    if(liveDisplay){
+      liveDisplay.document.title='Little Detectives · Live Participants';
+      liveDisplay.document.body.style.margin='0';
+      liveDisplay.document.body.style.background='#102c39';
+    }
+  }
+  displayedSession=sessionId;
+  if(liveDisplay&&!liveDisplay.closed){
+    $('ldProjection').hidden=true;
+    liveDisplay.focus();
+  }else $('ldProjection').hidden=false;
+  renderLiveDisplay();
+}
+function displayRoot(){
+  if(liveDisplay&&!liveDisplay.closed){try{return liveDisplay.document.body}catch{return null}}
+  const fallback=$('ldProjection');
+  return fallback&&!fallback.hidden?fallback:null;
+}
+function updateDisplayClock(){
+  const root=displayRoot();
+  if(!root||!session||displayedSession!==sessionId)return;
+  const timer=root.querySelector('[data-display-clock]');
+  if(!timer)return;
+  const left=secondsLeft(session.meta);
+  timer.textContent=session.meta.state==='ended'?'':left===Infinity?'No time limit':formatTime(left*1000)+' remaining';
+}
+function victorySound(){
+  if(!soundEnabled||!displayAudio||displayAudio.state!=='running')return;
+  const start=displayAudio.currentTime;
+  [523,659,784,1047].forEach((frequency,i)=>{
+    const note=displayAudio.createOscillator(),volume=displayAudio.createGain();
+    const at=start+i*.12;
+    note.frequency.value=frequency;
+    volume.gain.setValueAtTime(.0001,at);
+    volume.gain.exponentialRampToValueAtTime(.15,at+.025);
+    volume.gain.exponentialRampToValueAtTime(.0001,at+.30);
+    note.connect(volume);volume.connect(displayAudio.destination);
+    note.start(at);note.stop(at+.31);
+  });
+}
+async function playAgain(){
+  if(busy||!session||session.meta.state!=='ended')return;
+  busy=true;
+  try{
+    const {title,game,limitSeconds}=session.meta;
+    $('ldClass').value=title;
+    $('ldGame').value=game;
+    $('ldLimit').value=String(limitSeconds);
+    await createSession();
+    if(backend==='firebase'){
+      if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();
+      $('ldProjection').hidden=true;
+    }else{
+      displayedSession=sessionId;
+      renderLiveDisplay();
+    }
+    window.focus?.();
+  }finally{busy=false}
+}
+function renderLiveDisplay(){
+  const root=displayRoot();
+  if(!root||!session||displayedSession!==sessionId)return;
+  const doc=root.ownerDocument;
+  const make=(tag,value,cls)=>{
+    const el=doc.createElement(tag);
+    if(value!==undefined)el.textContent=value;
+    if(cls)el.className=cls;
+    return el;
+  };
+  const frame=make('main',undefined,'ld-display');
+  frame.append(make('style',displayCss));
+  const ended=session.meta.state==='ended';
+  const total=Object.keys(session.questions).length;
+  const scores=ranked(session,keys,players);
+  const finished=scores.filter(row=>row.answered===total).length;
+  const allDone=scores.length>0&&finished===scores.length;
+  frame.append(make('h1',ended?(allDone?'All participants are done!':'Round finished!'):'Live participants'));
+  const roundLabel=session.meta.game==='words'?'Round 1 · Stationery scan':'Round 2 · Location scan';
+  frame.append(make('p',session.meta.title+' · '+roundLabel+' · '+finished+' of '+scores.length+' finished'));
+  if(!ended){
+    const timer=make('p');
+    timer.setAttribute('data-display-clock','');
+    frame.append(timer);
+    if(session.meta.state==='waiting')frame.append(make('p','New session ready. Share the new QR code from the teacher dashboard, then start the round.'));
+    if(session.meta.state==='paused')frame.append(make('p','Round paused'));
+  }
+  const actions=make('div',undefined,'display-actions');
+  function action(label,handler){
+    const b=make('button',label);
+    b.onclick=handler;
+    actions.append(b);
+  }
+  action(soundEnabled?'Mute celebration':'Enable celebration sound',()=>{
+    soundEnabled=!soundEnabled;
+    if(soundEnabled)displayAudio?.resume().catch(()=>{});
+    renderLiveDisplay();
+  });
+  if(ended){
+    action('Play again',run(playAgain));
+    action('Download scores',exportCSV);
+  }
+  action('Back to teacher dashboard',()=>{
+    if(liveDisplay&&!liveDisplay.closed)liveDisplay.close();
+    $('ldProjection').hidden=true;
+    window.focus?.();
+  });
+  frame.append(actions);
+  if(ended&&scores.length){
+    const podium=make('div',undefined,'display-podium');
+    scores.slice(0,3).forEach((row,i)=>{
+      const card=make('div',undefined,'display-medal');
+      card.append(make('span',['🥇 1st place','🥈 2nd place','🥉 3rd place'][i]),make('strong',row.name),make('span',row.score+' / '+total*10+' points'));
+      podium.append(card);
+    });
+    frame.append(podium);
+  }
+  const visibleRows=ended?scores:[...scores].sort((a,b)=>a.joinedAt-b.joinedAt||a.name.localeCompare(b.name));
+  const tableWrap=make('div',undefined,'display-table'),table=make('table'),head=make('thead'),header=make('tr'),body=make('tbody');
+  for(const label of ended?['Rank','Participant','Score','Answered','Active time']:['Participant','Progress',Object.keys(session.questions).sort().map((_,i)=>'Q'+(i+1)).join(' · '),'Last answer'])header.append(make('th',label));
+  head.append(header);
+  table.append(head,body);
+  visibleRows.forEach((row,i)=>{
+    const tr=make('tr');
+    if(ended){
+      for(const value of [i+1,row.name,row.score+' / '+total*10,row.answered+' / '+total,formatTime(row.time)])tr.append(make('td',String(value)));
+    }else{
+      const answers=players[row.id].answers||{};
+      const marks=Object.keys(session.questions).sort().map(id=>answers[id]?'●':'○').join(' ');
+      const dots=make('td',marks,'display-answer');
+      dots.setAttribute('aria-label',Object.keys(session.questions).sort().map((id,q)=>'Question '+(q+1)+' '+(answers[id]?'answered':'pending')).join(', '));
+      tr.append(make('td',row.name),make('td',row.answered===total?'Finished':row.answered+' / '+total),dots,make('td',date(row.at)));
+    }
+    body.append(tr);
+  });
+  tableWrap.append(table);
+  frame.append(tableWrap);
+  root.replaceChildren(frame);
+  updateDisplayClock();
+  if(ended&&announcedSession!==sessionId){
+    announcedSession=sessionId;
+    victorySound();
+  }
+}
+
+function setClassroomBackdrop(){
+  ROOT.style.setProperty('--ld-classroom','url("'+ASSETS.bg+'")');
+}
+function hideJoinQR(){
+  $('ldQRProjection').hidden=true;
+  $('ldStatus').inert=false;
+  $('ldTeacher').inert=false;
+  ROOT.querySelector?.('.ld-header')?.removeAttribute('inert');
+}
+function showJoinQR(){
+  const qr=$('ldQR');
+  if(backend!=='firebase'||!session||qr.hidden)return;
+  setClassroomBackdrop();
+  $('ldProjectedQR').src=qr.toDataURL('image/png');
+  $('ldQRProjection').hidden=false;
+  $('ldStatus').inert=true;
+  $('ldTeacher').inert=true;
+  ROOT.querySelector?.('.ld-header')?.setAttribute('inert','');
+}
+$('ldShowQR').onclick=showJoinQR;
+$('ldCloseQR').onclick=()=>{
+  hideJoinQR();
+  $('ldStart').focus?.();
+};
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!$('ldQRProjection').hidden)$('ldCloseQR').click();
+});
 $('ldApiKey').value=cfg.apiKey;$('ldDatabaseURL').value=cfg.databaseURL;$('ldBaseURL').value=/^https?:/.test(location.protocol)?location.href.split('#')[0]:'';
-$('ldBackend').onchange=()=>{backend=$('ldBackend').value;setRole('teacher');status(backend==='demo'?'Local preview selected.':'Enter your Firebase connection and teacher sign-in.')};$('ldLogin').onclick=run(async()=>{cfg=readConfig();await signIn($('ldEmail').value.trim(),$('ldPassword').value);localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));$('ldPassword').value='';updateConnection();await teacherReady();status('Connected. You can create a live classroom session.')});$('ldLogout').onclick=()=>{authStore().removeItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL);auth=null;setRole(role);status('Signed out. Saved class results remain in Firebase.')};$('ldTeacherTab').onclick=()=>setRole('teacher');$('ldStudentTab').onclick=()=>setRole('student');$('ldClose').onclick=close;$('ldCreate').onclick=run(createSession);$('ldLoad').onclick=run(()=>loadSession($('ldExisting').value));$('ldStart').onclick=run(()=>control('live'));$('ldPause').onclick=run(()=>control('paused'));$('ldEnd').onclick=run(()=>control('ended'));$('ldShowRanks').onchange=renderDashboard;$('ldExport').onclick=run(exportCSV);$('ldPublish').onclick=run(async()=>{players=await db('ldPlayers/'+sessionId)||{};await publishResults();status('Scores published again.')});$('ldBaseURL').onchange=()=>{if(sessionId)makeInvite()};$('ldCopy').onclick=run(async()=>{await navigator.clipboard.writeText($('ldLink').value);status('Student link copied.')});$('ldOpenStudent').onclick=()=>window.open($('ldLink').value,'_blank','noopener');$('ldDownloadQR').onclick=()=>{const a=document.createElement('a');a.href=$('ldQR').toDataURL('image/png');a.download='mission-'+sessionId+'-QR.png';a.click()};$('ldJoin').onclick=run(join);$('ldSubmit').onclick=run(sendAnswer);$('ldRetrySync').onclick=run(async()=>{await flushPending();renderStudent()});$('ldRevealPicture').onclick=()=>$('ldScanPicture').classList.toggle('revealed');
+$('ldBackend').onchange=()=>{backend=$('ldBackend').value;setRole('teacher');status(backend==='demo'?'Local preview selected.':'Enter your Firebase connection and teacher sign-in.')};$('ldLogin').onclick=run(async()=>{cfg=readConfig();await signIn($('ldEmail').value.trim(),$('ldPassword').value);localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));$('ldPassword').value='';updateConnection();await teacherReady();status('Connected. You can create a live classroom session.')});$('ldLogout').onclick=()=>{authStore().removeItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL);auth=null;setRole(role);status('Signed out. Saved class results remain in Firebase.')};$('ldTeacherTab').onclick=()=>setRole('teacher');$('ldStudentTab').onclick=()=>setRole('student');$('ldClose').onclick=close;$('ldCreate').onclick=run(createSession);$('ldLoad').onclick=run(()=>loadSession($('ldExisting').value));$('ldStart').onclick=run(async()=>{
+  hideJoinQR();if(session?.meta.state==='waiting')openLiveDisplay();
+  await control('live');
+});
+$('ldDisplay').onclick=()=>openLiveDisplay();$('ldPause').onclick=run(()=>control('paused'));$('ldEnd').onclick=run(()=>control('ended'));$('ldShowRanks').onchange=renderDashboard;$('ldExport').onclick=run(exportCSV);$('ldPublish').onclick=run(async()=>{players=await db('ldPlayers/'+sessionId)||{};await publishResults();status('Scores published again.')});$('ldBaseURL').onchange=()=>{if(sessionId)makeInvite()};$('ldCopy').onclick=run(async()=>{await navigator.clipboard.writeText($('ldLink').value);status('Student link copied.')});$('ldOpenStudent').onclick=()=>window.open($('ldLink').value,'_blank','noopener');$('ldDownloadQR').onclick=()=>{const a=document.createElement('a');a.href=$('ldQR').toDataURL('image/png');a.download='mission-'+sessionId+'-QR.png';a.click()};$('ldJoin').onclick=run(join);$('ldSubmit').onclick=run(sendAnswer);$('ldRetrySync').onclick=run(async()=>{await flushPending();renderStudent()});$('ldRevealPicture').onclick=()=>$('ldScanPicture').classList.toggle('revealed');
 const stage=$('ldScanStage');let beam={x:50,y:50};function scan(x,y){beam={x:Math.max(0,Math.min(100,x)),y:Math.max(0,Math.min(100,y))};stage.style.setProperty('--sx',beam.x+'%');stage.style.setProperty('--sy',beam.y+'%')}stage.onpointerdown=e=>{stage.setPointerCapture(e.pointerId);move(e)};function move(e){const r=stage.getBoundingClientRect();scan((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100)}stage.onpointermove=move;stage.onkeydown=e=>{const d={ArrowLeft:[-5,0],ArrowRight:[5,0],ArrowUp:[0,-5],ArrowDown:[0,5]}[e.key];if(d){e.preventDefault();scan(beam.x+d[0],beam.y+d[1])}};
 for(const parent of [document.querySelector('.home-dash-nav'),document.querySelector('.round-actions')])if(parent){const b=document.createElement('button');b.textContent='Live Classroom';b.onclick=()=>open();parent.append(b)}
 // The hash contains public connection details only, never a teacher token or password.
-try{if(location.hash.startsWith('#ld=')){const payload=JSON.parse(atob(location.hash.slice(4)));if(payload.cfg){if(!configValid(payload.cfg))throw Error('Invalid class connection in the link.');cfg=payload.cfg;backend='firebase'}else backend=payload.demo?'demo':'firebase';open('student');$('ldJoinCode').value=String(payload.id||'').toUpperCase();$('ldName').value=localStorage.getItem('ld-display-name')||'';status(backend==='demo'?'Student preview · same browser only.':'Enter your name to join your teacher’s mission.')}}catch(e){open('student');status('This session link is invalid. Ask your teacher for a new QR code.',true)}
+try{if(location.hash.startsWith('#ld=')){ROOT.setAttribute('data-student-invite','');setClassroomBackdrop();$('ldCodeField').hidden=true;$('ldJoinHint').hidden=true;const payload=JSON.parse(atob(location.hash.slice(4)));if(payload.cfg){if(!configValid(payload.cfg))throw Error('Invalid class connection in the link.');cfg=payload.cfg;backend='firebase'}else backend=payload.demo?'demo':'firebase';open('student');$('ldJoinCode').value=String(payload.id||'').toUpperCase();$('ldName').value=localStorage.getItem('ld-display-name')||'';status(backend==='demo'?'Student preview · same browser only.':'Enter your name to join your teacher’s mission.')}}catch(e){open('student');status('This session link is invalid. Ask your teacher for a new QR code.',true)}
 window.addEventListener('online',()=>poll());document.addEventListener('visibilitychange',()=>{if(!document.hidden)poll()});
 // Pure helpers are available for local verification without a Firebase account.
 window.LDLiveHelpers={buildQuestions,elapsedAt,ranked,configValid};
