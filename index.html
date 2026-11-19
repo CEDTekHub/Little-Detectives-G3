@@ -2704,7 +2704,11 @@ function renderLiveDisplay(){
   if(typeof window.openClassroomTools==='function'){
     const tools=make('button','Classroom Tools','display-tools-shortcut');
     tools.setAttribute('aria-haspopup','dialog');
-    tools.onclick=()=>{window.focus?.();window.openClassroomTools()};
+    tools.onclick=()=>{
+      const projection=doc.defaultView;
+      window.focus?.();
+      window.openClassroomTools(()=>{if(projection&&!projection.closed)projection.focus?.()});
+    };
     actions.append(tools);
   }
   if(teacherPaced()&&!ended){
@@ -3291,6 +3295,9 @@ button.ld-tools-shortcut:focus-visible{outline:3px solid #387967;outline-offset:
 button.ld-tools-shortcut[hidden],body.ld-student-link .ld-tools-shortcut{display:none!important}
 .ld-tools-dock{display:flex;flex:0 0 auto;justify-content:flex-end;align-items:center;padding:8px 0;gap:8px;min-width:0}
 .round-commandbar .round-actions,#teacherNook>header,#vsTop{flex-wrap:wrap}
+#playArea .round-actions > #playboardFromGame{min-height:38px;padding:6px 10px;font-size:14px}
+#missionViewer.presentation-clean #missionBottomNav:has(.ld-tools-shortcut){flex-wrap:wrap;max-width:calc(100% - 16px)}
+#missionViewer #missionBottomNav .ld-tools-shortcut{min-height:38px;font-size:14px;padding:6px 10px}
 @media(max-width:640px){
  .round-commandbar .round-actions{justify-content:flex-start}
  #teacherNook>header,#vsTop{row-gap:8px}
@@ -3310,16 +3317,33 @@ button.ld-tools-shortcut[hidden],body.ld-student-link .ld-tools-shortcut{display
    return;
  }
  const launch=launcher.onclick;
- let returnFocus;
+ const back=document.getElementById('hubPlayboardBack');
+ const playArea=document.getElementById('playArea');
+ let previousActivity;
+ if(back)back.textContent='← Back to activity';
+ document.getElementById('hubPlayboardHome')?.addEventListener('click',()=>{
+   previousActivity=null;
+ },{capture:true});
  board.addEventListener('close',()=>{
-   if(returnFocus?.isConnected)returnFocus.focus();
-   returnFocus=null;
+   const origin=previousActivity;
+   previousActivity=null;
+   if(!origin)return;
+   if(origin.resume&&getComputedStyle(playArea).display!=='none'&&phase==='paused'){
+     document.getElementById('startBtn')?.click();
+   }
+   if(origin.focus?.isConnected)origin.focus.focus({preventScroll:true});
+   origin.afterClose?.();
  });
- function openTools(){
+ function openTools(afterClose){
    if(board.open)return;
-   returnFocus=document.activeElement;
+   const focus=document.activeElement;
+   previousActivity={
+     focus,
+     resume:!!playArea?.contains(focus)&&typeof phase!=='undefined'&&phase==='playing',
+     afterClose:typeof afterClose==='function'?afterClose:null
+   };
    launch.call(launcher);
-   document.getElementById('hubPlayboardBack')?.focus();
+   back?.focus();
  }
  window.openClassroomTools=openTools;
  function prepare(button){
@@ -3339,8 +3363,16 @@ button.ld-tools-shortcut[hidden],body.ld-student-link .ld-tools-shortcut{display
  for(const button of [menuLauncher,gameLauncher,document.getElementById('playboardFromLesson')]){
    if(button)prepare(button);
  }
- const gameActions=document.querySelector('#playArea .round-actions');
- if(gameActions&&gameLauncher)gameActions.append(gameLauncher);
+ const gameActions=document.querySelector('#playArea .round-actions')||document.querySelector('#playArea .playbar');
+ if(gameActions&&gameLauncher){
+   const teachingTools=document.getElementById('roundTeachingTools');
+   if(teachingTools?.parentElement===gameActions)teachingTools.after(gameLauncher);
+   else gameActions.append(gameLauncher);
+ }
+ const lessonBar=document.getElementById('missionBottomNav');
+ const lessonShortcut=document.getElementById('playboardFromLesson');
+ if(lessonBar&&lessonShortcut)lessonBar.append(lessonShortcut);
+ else addShortcut(lessonBar);
  addShortcut(document.querySelector('#teacherNook > header'));
  addShortcut(document.getElementById('vsTop'));
  function addDialogShortcut(dialog){
