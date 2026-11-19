@@ -975,3 +975,1332 @@ refreshButton();
 <script>
 (()=>{const tools=document.getElementById('nookTools');if(!tools)return;const sizes=document.createElement('div');sizes.className='nook-size-controls';sizes.setAttribute('role','group');sizes.setAttribute('aria-label','Resize selected picture');sizes.append(document.getElementById('nookSmaller'),document.getElementById('nookLarger'));const edit=tools.querySelector('.nook-edit-menu');if(edit)tools.insertBefore(sizes,edit);else tools.append(sizes)})();
 </script>
+<style>
+#ldHub[hidden],#ldHub [hidden]{display:none!important}#ldHub{position:fixed;inset:0;z-index:200;background:radial-gradient(at top left,#d7f5ec,transparent 65%),#edf2fa;color:#224651;overflow:auto;padding:clamp(12px,2vw,28px);font-family:'Trebuchet MS',Arial,sans-serif}#ldHub *{box-sizing:border-box}#ldHub button,#ldHub input,#ldHub select{font:inherit;min-height:44px;border:1px solid #a7c8c4;border-radius:12px;padding:10px 14px;color:#234b56;background:#ffffffd9}#ldHub button{font-weight:bold;cursor:pointer}#ldHub button:disabled{opacity:.45;cursor:default}#ldHub .ld-primary{background:#246f68;color:white}#ldHub .ld-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}#ldHub h1{font-size:clamp(24px,3vw,38px);margin:0}#ldHub h2{font-size:25px;margin:0 0 14px}#ldHub p{line-height:1.5}#ldHub .ld-card{background:#ffffffbd;border:1px solid white;border-radius:22px;padding:20px;box-shadow:0 12px 40px #254c5912;backdrop-filter:blur(16px);min-width:0}#ldHub .ld-grid{display:grid;grid-template-columns:minmax(250px,340px) minmax(0,1fr);gap:16px;max-width:1500px;margin:auto}#ldHub .ld-stack{display:grid;gap:12px}#ldHub label{display:grid;gap:6px;font-size:17px}#ldHub .ld-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}#ldHub .ld-note{font-size:15px;color:#57717c}#ldHub .ld-banner{padding:10px 14px;background:#fff3d1;border-radius:12px;margin:0 0 16px}#ldHub #ldStatus{max-width:1500px;margin:0 auto 12px;padding:10px 14px;border-radius:12px;background:#e3eee9;min-height:42px}#ldHub #ldStatus[data-error=true]{background:#ffe2dc;color:#842e2a}#ldHub .ld-metrics{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}#ldHub .ld-metrics span{background:#e8f2f1;border-radius:12px;padding:12px;font-weight:bold}#ldHub .ld-table-wrap{overflow:auto}#ldHub table{border-collapse:collapse;width:100%;font-size:17px}#ldHub th,#ldHub td{padding:12px 9px;text-align:left;border-bottom:1px solid #d8e6e5;white-space:nowrap}#ldHub th{color:#51717b;font-size:14px}#ldHub #ldQR{display:block;width:min(280px,100%);height:auto;background:white;border-radius:8px;margin:12px auto}#ldHub #ldLink{width:100%;font-size:14px}#ldHub #ldStudent{max-width:1100px;margin:auto}#ldHub #ldQuestion{font-size:clamp(25px,3vw,40px);line-height:1.3;margin:8px 0 16px;text-align:center}#ldHub .ld-scan-stage{position:relative;height:clamp(230px,42vh,430px);border-radius:20px;overflow:hidden;touch-action:none;background:#142d40;isolation:isolate}#ldHub .ld-room{position:absolute;inset:0;background:center/cover;opacity:.36}#ldHub .ld-scan-picture{position:absolute;inset:0;clip-path:circle(95px at var(--sx,50%) var(--sy,50%));background:#cdece633}#ldHub .ld-scan-picture.revealed{clip-path:none}#ldHub .ld-scanner{position:absolute;left:var(--sx,50%);top:var(--sy,50%);width:190px;height:190px;transform:translate(-50%,-50%);border:3px solid #9effdf;box-shadow:0 0 22px #80ffe7;pointer-events:none;border-radius:50%;z-index:5}#ldHub .ld-scanner:after{content:'+';position:absolute;inset:0;display:grid;place-items:center;color:#abffe9;font-size:36px}#ldHub .ld-specimen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:210px;height:210px;object-fit:contain}#ldHub .ld-location{position:absolute;width:min(400px,85%);height:90%;left:50%;top:50%;transform:translate(-50%,-50%)}#ldHub .ld-anchor,#ldHub .ld-front{position:absolute;left:18%;top:25%;width:64%;height:60%;object-fit:contain;z-index:1}#ldHub .ld-small{position:absolute;left:39%;top:42%;width:25%;height:25%;object-fit:contain;z-index:2}#ldHub .ld-front{z-index:3;clip-path:inset(48% 0 0 0)}#ldHub .ld-location[data-prep=on] .ld-small{top:13%;left:39%;z-index:3}#ldHub .ld-location[data-prep=under] .ld-small{top:70%;left:40%;z-index:0}#ldHub .ld-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}#ldHub .ld-choices button{font-size:clamp(21px,2.5vw,30px);min-height:65px}#ldHub .ld-choices button[aria-pressed=true]{background:#236e67;color:white}#ldHub #ldStudentProgress{font-size:20px;font-weight:bold}#ldHub #ldCountdown{font-variant-numeric:tabular-nums;font-weight:bold;font-size:24px}#ldHub details{border-top:1px solid #d1e2df;padding-top:12px}#ldHub summary{cursor:pointer;font-weight:bold;padding:8px 0}#ldHub .ld-empty{padding:35px 12px;text-align:center;color:#67828b}@media(max-width:850px){#ldHub .ld-grid{grid-template-columns:1fr}#ldHub .ld-choices{grid-template-columns:repeat(2,minmax(0,1fr))}#ldHub .ld-card{padding:15px}}
+</style>
+<section id="ldHub" hidden aria-label="Live classroom multiplayer">
+<header class="ld-header"><div><h1>Live Classroom</h1><span class="ld-note">Little Detectives · Play together, each on your own device</span></div><div class="ld-row"><button id="ldTeacherTab">Teacher dashboard</button><button id="ldStudentTab">Join as student</button><button id="ldClose">Main menu</button></div></header>
+<div id="ldStatus" role="status" aria-live="polite">Choose a preview or connect Firebase to host a live class.</div>
+<div id="ldTeacher" class="ld-grid"><aside class="ld-stack"><section class="ld-card ld-stack"><h2>Class connection</h2><div id="ldDemoBanner" class="ld-banner" hidden>Preview only · These sessions work between tabs in this browser. Other iPads need Firebase.</div><label>Connection<select id="ldBackend"><option value="demo">Local preview · no account needed</option><option value="firebase">Firebase · live class</option></select></label><div id="ldFirebaseFields" class="ld-stack" hidden><label>Firebase Web API key<input id="ldApiKey" autocomplete="off" placeholder="AIza…"></label><label>Realtime Database URL<input id="ldDatabaseURL" type="url" placeholder="https://your-project-default-rtdb.asia-southeast1.firebasedatabase.app"></label><label>Teacher email<input id="ldEmail" type="email" autocomplete="username"></label><label>Teacher password<input id="ldPassword" type="password" autocomplete="current-password"></label><button id="ldLogin" class="ld-primary">Save connection & sign in</button><p class="ld-note">Use a teacher account created in your Firebase project. The supplied rules require its UID in the teacher allowlist. Never enter a service-account key.</p></div><p id="ldIdentity" class="ld-note">Local teacher preview</p><button id="ldLogout">Sign out</button></section><section class="ld-card ld-stack"><h2>Create a session</h2><label>Class / session title<input id="ldClass" maxlength="60" value="Grade 4 Detectives"></label><label>Student game<select id="ldGame"><option value="words">Round 1 · Stationery scan</option><option value="locations">Round 2 · Location scan</option></select></label><label>Time limit<select id="ldLimit"><option value="180">3 minutes</option><option value="300" selected>5 minutes</option><option value="600">10 minutes</option><option value="0">No limit</option></select></label><label>Published hub URL<input id="ldBaseURL" type="url" placeholder="https://yourname.github.io/your-repository/"></label><button id="ldCreate" class="ld-primary">Create session</button><label>Reopen an existing session<input id="ldExisting" maxlength="12" placeholder="Session code"></label><button id="ldLoad">Load session</button></section></aside>
+<main class="ld-stack"><section id="ldNoSession" class="ld-card"><h2>Ready for your first live class?</h2><p>Create a preview session to explore the workflow now. Once Firebase is connected, students can scan your QR code, enter their names, and play simultaneously.</p><p>These two student games are added alongside your existing activities. Your slides, Teacher’s Nook, and original rounds remain teacher tools.</p></section><section id="ldSessionPanel" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><h2 id="ldSessionTitle"></h2><strong id="ldSessionState"></strong></div><div class="ld-row"><button id="ldStart" class="ld-primary">Start / Resume</button><button id="ldPause">Pause</button><button id="ldEnd">End & publish scores</button><button id="ldExport">Download CSV</button><button id="ldPublish">Publish scores again</button></div><div class="ld-metrics"><span id="ldCount">0 players</span><span id="ldFinished">0 finished</span><span id="ldClock">Waiting</span></div><details open><summary>Invite students</summary><p id="ldCode"></p><canvas id="ldQR" hidden aria-label="Student session QR code"></canvas><input id="ldLink" readonly aria-label="Student link"><div class="ld-row"><button id="ldCopy">Copy student link</button><button id="ldOpenStudent">Open student preview</button><button id="ldDownloadQR">Download QR image</button></div><p id="ldQRNote" class="ld-note"></p></details><p class="ld-note" id="ldUpdated">Waiting for players.</p><div class="ld-table-wrap"><table><thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Answered</th><th>Active time</th><th>Joined</th><th>Last answer</th></tr></thead><tbody id="ldRows"></tbody></table></div><p class="ld-note">Scores: 10 points per correct answer. Ties use less active time, then the final answer timestamp. Names may repeat; each device receives a separate player ID.</p><label><input id="ldShowRanks" type="checkbox" checked> Show rankings on teacher screen</label></section></main></div>
+<main id="ldStudent" hidden><section id="ldJoinCard" class="ld-card ld-stack"><h2>Join the detective mission</h2><label>Session code<input id="ldJoinCode" maxlength="12" autocapitalize="characters"></label><label>Your name<input id="ldName" maxlength="40" autocomplete="nickname" placeholder="Type your name"></label><button id="ldJoin" class="ld-primary">Join mission</button><p class="ld-note">No student email or password needed. Use the teacher’s QR code on your iPad to carry the class connection automatically.</p></section><section id="ldPlayCard" class="ld-card" hidden><div class="ld-row" style="justify-content:space-between"><span id="ldStudentProgress"></span><span id="ldCountdown"></span></div><h2 id="ldQuestion"></h2><div id="ldScanStage" class="ld-scan-stage" tabindex="0" role="group" aria-label="Move your finger or arrow keys to scan the picture"><div id="ldRoom" class="ld-room"></div><div id="ldScanPicture" class="ld-scan-picture"></div><div class="ld-scanner"></div></div><div class="ld-row" style="margin-top:10px"><span class="ld-note">Move your finger to scan · Arrow keys also move the lens</span><button id="ldRevealPicture">Show whole picture</button></div><div id="ldChoices" class="ld-choices"></div><button id="ldSubmit" class="ld-primary" disabled>Send answer</button><p id="ldStudentMessage" aria-live="polite"></p><button id="ldRetrySync" hidden>Retry saving answer</button></section></main>
+</section>
+
+<script id="ldBundledQR">
+/* QRCode for JavaScript, copyright 2009 Kazuhiko Arase. MIT licensed. Bundled from qrcode-terminal. */
+(function(){const modules={"QR8bitByte":function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+},"QRBitBuffer":function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+},"QRErrorCorrectLevel":function(module,exports,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+},"QRMaskPattern":function(module,exports,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+},"QRMath":function(module,exports,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+},"QRMode":function(module,exports,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+},"QRPolynomial":function(module,exports,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+},"QRRSBlock":function(module,exports,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+},"QRUtil":function(module,exports,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+},"index":function(module,exports,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+}};const cache={};function require(id){id=id.replace(/^\.\//,'');if(cache[id])return cache[id].exports;const m={exports:{}};cache[id]=m;modules[id](m,m.exports,require);return m.exports}window.LDQRCode=require('index')})();
+</script>
+<script id="ldMultiplayerCode">
+(()=>{'use strict';
+const $=id=>document.getElementById(id),ROOT=$('ldHub'),CONFIG_KEY='ld-live-config-v1',DEMO_KEY='ld-live-preview-v1',stamp={'.sv':'timestamp'};
+let cfg={apiKey:'',databaseURL:''},backend='demo',role='teacher',auth=null,session=null,sessionId='',keys={},players={},self=null,choice=null,pending=null,busy=false,polling=false,loop=null,clockLoop=null,offset=0;
+try{cfg={...cfg,...JSON.parse(localStorage.getItem(CONFIG_KEY)||'{}')}}catch{}
+function status(message,error=false){$('ldStatus').textContent=message;$('ldStatus').dataset.error=String(error)}
+function run(fn){return async()=>{try{await fn()}catch(e){status(friendly(e),true)}}}
+function friendly(e){const m=e?.message||String(e);if(/PERMISSION_DENIED|Permission denied/i.test(m))return 'Access denied. Check the supplied database rules, teacher UID allowlist, and whether this session is accepting answers.';if(/Failed to fetch|NetworkError/i.test(m))return 'Connection interrupted. Your unsent answer stays on this device. Reconnect and retry.';if(/INVALID_LOGIN|INVALID_PASSWORD|EMAIL_NOT_FOUND/i.test(m))return 'Teacher sign-in failed. Check the Firebase email/password account.';return m}
+const now=()=>Date.now()+offset;
+function uid(){return crypto.randomUUID().replace(/-/g,'')}
+function configValid(c){return !!c.apiKey&&/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)\/?$/i.test(c.databaseURL)}
+function readConfig(){return {apiKey:$('ldApiKey').value.trim(),databaseURL:$('ldDatabaseURL').value.trim().replace(/\/$/,'')}}
+function authStore(){return backend==='firebase'&&role==='student'?localStorage:sessionStorage}
+function saveAuth(){if(auth)authStore().setItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL,JSON.stringify(auth))}
+function restoreAuth(){try{auth=JSON.parse(authStore().getItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL)||'null')}catch{auth=null}}
+async function fetchJSON(url,opt){const r=await fetch(url,{...opt,cache:'no-store'});let d;try{d=await r.json()}catch{throw Error('The connection returned an unreadable response.')}if(!r.ok)throw Error(d?.error?.message||d?.error||'Request failed ('+r.status+')');return d}
+async function signIn(email,password){if(!configValid(cfg))throw Error('Enter a valid Firebase Web API key and Realtime Database URL.');const anonymous=!email;const d=await fetchJSON('https://identitytoolkit.googleapis.com/v1/accounts:'+(anonymous?'signUp':'signInWithPassword')+'?key='+encodeURIComponent(cfg.apiKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(anonymous?{returnSecureToken:true}:{email,password,returnSecureToken:true})});auth={uid:d.localId,token:d.idToken,refresh:d.refreshToken,expires:Date.now()+Number(d.expiresIn)*1000};saveAuth();await syncClock()}
+async function syncClock(){const before=Date.now();await db('ldClocks/'+auth.uid,'PUT',stamp);const server=await db('ldClocks/'+auth.uid);offset=server-((before+Date.now())/2)}
+async function token(){if(!auth)throw Error(role==='teacher'?'Sign in as a teacher first.':'Join the mission first.');if(auth.expires<Date.now()+60000){const d=await fetchJSON('https://securetoken.googleapis.com/v1/token?key='+encodeURIComponent(cfg.apiKey),{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'refresh_token',refresh_token:auth.refresh})});auth={uid:d.user_id,token:d.id_token,refresh:d.refresh_token,expires:Date.now()+Number(d.expires_in)*1000};saveAuth()}return auth.token}
+function localRead(){return JSON.parse(localStorage.getItem(DEMO_KEY)||'{}')}
+function resolveStamp(v){if(v&&typeof v==='object'){if(v['.sv']==='timestamp')return Date.now();return Object.fromEntries(Object.entries(v).map(([k,val])=>[k,resolveStamp(val)]))}return v}
+function localDB(path,method,value){const all=localRead(),parts=path.split('/').filter(Boolean);let p=all;for(const k of parts.slice(0,-1))p=p[k]??={};const last=parts.at(-1);if(method==='GET')return p[last]??null;if(method==='PATCH')p[last]={...(p[last]||{}),...resolveStamp(value)};else if(method==='DELETE')delete p[last];else p[last]=resolveStamp(value);localStorage.setItem(DEMO_KEY,JSON.stringify(all));return p[last]}
+async function db(path,method='GET',value){if(backend==='demo')return localDB(path,method,value);if(!configValid(cfg))throw Error('Scan the teacher’s session QR code to load the Firebase connection.');const t=await token();return fetchJSON(cfg.databaseURL+'/'+path+'.json?auth='+encodeURIComponent(t),{method,headers:{'Content-Type':'application/json'},...(value===undefined?{}:{body:JSON.stringify(value)})})}
+function shuffle(a){return a.map(v=>({v,n:Math.random()})).sort((a,b)=>a.n-b.n).map(x=>x.v)}
+function buildQuestions(game){const words=['pen','pencil','book','ruler','marker','eraser'],plans=[['box','in'],['desk','on'],['chair','under'],['pencil case','in'],['chair','on'],['desk','under']],questions={},answerKeys={};shuffle(words).forEach((item,i)=>{const id='q'+i,[place,prep]=plans[i],anchor=item==='book'&&place==='pencil case'?'box':place,correct=game==='words'?(item==='eraser'?'an ':'a ')+item:prep;const options=shuffle(game==='words'?words.map(w=>(w==='eraser'?'an ':'a ')+w):['in','on','under']);const choices=Object.fromEntries(options.map((v,j)=>[String.fromCharCode(97+j),v]));questions[id]={item,anchor,prep:game==='locations'?prep:'',prompt:game==='words'?'What is it? It’s …':'The '+item+' is _____ the '+anchor+'.',choices};answerKeys[id]=Object.keys(choices).find(k=>choices[k]===correct)});return {questions,answerKeys}}
+function elapsedAt(meta,at=now()){return Object.values(meta.timeline||{}).reduce((sum,x)=>sum+Math.max(0,Math.min(at,x.end||at)-x.start),0)}
+function secondsLeft(meta){return meta.limitSeconds?Math.max(0,meta.limitSeconds-Math.floor(elapsedAt(meta)/1000)):Infinity}
+function formatTime(ms){const secs=Math.max(0,Math.floor(ms/1000));return Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')}
+function ranked(s,ks,ps){return Object.entries(ps||{}).map(([id,p])=>{const answers=Object.entries(p.answers||{}),at=answers.length?Math.max(...answers.map(([,a])=>a.at)):0;return {id,name:p.name||'Student',score:answers.reduce((sum,[q,a])=>sum+(ks[q]===a.choice?10:0),0),answered:answers.length,time:at?elapsedAt(s.meta,at):0,joinedAt:p.joinedAt,at}}).sort((a,b)=>b.score-a.score||b.answered-a.answered||a.time-b.time||a.at-b.at||a.id.localeCompare(b.id))}
+function setRole(next){role=next;restoreAuth();$('ldTeacher').hidden=role!=='teacher';$('ldStudent').hidden=role!=='student';$('ldTeacherTab').setAttribute('aria-pressed',String(role==='teacher'));$('ldStudentTab').setAttribute('aria-pressed',String(role==='student'));session=null;sessionId='';self=null;keys={};players={};pending=null;renderedQuestion='';$('ldSessionPanel').hidden=true;$('ldNoSession').hidden=false;$('ldJoinCard').hidden=false;$('ldPlayCard').hidden=true;updateConnection()}
+function updateConnection(){$('ldFirebaseFields').hidden=backend!=='firebase';$('ldDemoBanner').hidden=backend!=='demo';$('ldBackend').value=backend;$('ldIdentity').textContent=backend==='demo'?'Local preview · no remote connection':auth?'Signed in · UID: '+auth.uid:'Firebase not signed in'}
+function open(next='teacher'){try{if(typeof pause==='function')pause()}catch{}ROOT.hidden=false;setRole(next);clearInterval(loop);clearInterval(clockLoop);loop=setInterval(()=>poll(),4000);clockLoop=setInterval(tick,500);status(backend==='demo'?'Preview mode: use another tab in this browser to try student play.':'Connect your Firebase project to begin.')}
+function close(){ROOT.hidden=true;clearInterval(loop);clearInterval(clockLoop)}
+async function teacherReady(){if(backend==='demo'){auth={uid:'preview-teacher'};return}if(!auth)throw Error('Sign in to Firebase before creating or loading a class session.');await syncClock();const allowed=await db('ldTeachers/'+auth.uid);if(allowed!==true)throw Error('Add this teacher UID to ldTeachers in Firebase: '+auth.uid)}
+async function createSession(){await teacherReady();const base=$('ldBaseURL').value.trim();if(backend==='firebase'&&!/^https:\/\//.test(base))throw Error('Enter your published HTTPS GitHub Pages URL first.');const {questions,answerKeys}=buildQuestions($('ldGame').value);sessionId=uid().slice(0,12).toUpperCase();const title=$('ldClass').value.trim()||'Detective mission';const data={owner:auth.uid,meta:{title,game:$('ldGame').value,limitSeconds:Number($('ldLimit').value),state:'waiting',createdAt:stamp,updatedAt:stamp},questions};await db('ldSessions/'+sessionId,'PUT',data);await db('ldAnswerKeys/'+sessionId,'PUT',answerKeys);$('ldExisting').value=sessionId;await loadSession(sessionId);status('Session created. Students can join now; press Start when everyone is ready.')}
+async function loadSession(id){await teacherReady();id=id.trim().toUpperCase();if(!/^[A-F0-9]{12}$/.test(id))throw Error('Use the 12-character session code.');const s=await db('ldSessions/'+id);if(!s)throw Error('Session not found.');if(s.owner!==auth.uid)throw Error('This session belongs to another teacher.');const k=await db('ldAnswerKeys/'+id);if(!k)throw Error('Answer key missing. Create a new session.');session=s;sessionId=id;keys=k;players=await db('ldPlayers/'+id)||{};$('ldNoSession').hidden=true;$('ldSessionPanel').hidden=false;renderDashboard();makeInvite()}
+async function control(state){if(!session)throw Error('Create or load a session first.');const fresh=await db('ldSessions/'+sessionId);const m=fresh.meta;if(m.state==='ended')throw Error('This session is finished. Create a new session to play again.');if(state==='live'&&secondsLeft(m)<=0)throw Error('Time is up. End this session and create a new one.');if(m.state===state)return;const timeline={...(m.timeline||{})};if(m.state==='live'){const last=Object.keys(timeline).find(k=>!timeline[k].end);if(last)timeline[last]={...timeline[last],end:stamp}}if(state==='live')timeline['r'+Object.keys(timeline).length]={start:stamp};const patch={state,updatedAt:stamp,...(Object.keys(timeline).length?{timeline}:{})};if(state==='live'){patch.startedAt=stamp;patch.elapsedMs=elapsedAt(m)}await db('ldSessions/'+sessionId+'/meta','PATCH',patch);session=await db('ldSessions/'+sessionId);players=await db('ldPlayers/'+sessionId)||{};if(state==='ended')await publishResults();renderDashboard();status(state==='live'?'Mission started.':state==='paused'?'Mission paused for everyone.':'Mission ended. Scores published.')}
+async function publishResults(){if(!session||role!=='teacher')return;const rows=ranked(session,keys,players),total=Object.keys(session.questions).length;await db('ldResults/'+sessionId,'PUT',Object.fromEntries(rows.map((r,i)=>[r.id,{score:r.score,answered:r.answered,total,rank:i+1,activeMs:r.time,publishedAt:stamp}])))}
+function date(t){return t?new Date(t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'—'}
+function renderDashboard(){if(!session)return;$('ldSessionTitle').textContent=session.meta.title;$('ldSessionState').textContent=session.meta.state.toUpperCase();$('ldCode').textContent='Session code: '+sessionId;const rows=ranked(session,keys,players),total=Object.keys(session.questions).length;$('ldCount').textContent=rows.length+' players';$('ldFinished').textContent=rows.filter(r=>r.answered===total).length+' finished';$('ldRows').replaceChildren();for(const [i,r]of rows.entries()){const tr=document.createElement('tr');for(const value of [$('ldShowRanks').checked?i+1:'—',r.name,r.score+' / '+total*10,r.answered+' / '+total,formatTime(r.time),date(r.joinedAt),date(r.at)]){const td=document.createElement('td');td.textContent=String(value);tr.append(td)}$('ldRows').append(tr)}if(!rows.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.className='ld-empty';td.textContent='No players yet. Share the session link to invite your class.';tr.append(td);$('ldRows').append(tr)}$('ldUpdated').textContent='Last synced '+date(now())+' · Updates every 4 seconds while this screen is open.';$('ldPublish').disabled=session.meta.state!=='ended';$('ldStart').disabled=session.meta.state==='live'||session.meta.state==='ended';$('ldPause').disabled=session.meta.state!=='live';$('ldEnd').disabled=session.meta.state==='ended';tick()}
+function inviteURL(){const base=($('ldBaseURL').value.trim()||location.href).split('#')[0];const u=new URL(base);if(!['https:','http:','file:'].includes(u.protocol))throw Error('Use a valid published website URL.');const payload={id:sessionId,demo:backend==='demo',...(backend==='firebase'?{cfg}: {})};u.hash='ld='+btoa(JSON.stringify(payload));return u.href}
+function makeInvite(){try{const link=inviteURL();$('ldLink').value=link;$('ldOpenStudent').textContent=backend==='demo'?'Open student preview tab':'Open student link';$('ldDownloadQR').disabled=backend==='demo';$('ldQR').hidden=backend==='demo';$('ldQRNote').textContent=backend==='demo'?'Preview sessions only sync in this browser. Connect Firebase to generate a QR code for separate iPads.':'Students scan this QR code with their iPad camera. Only the public Firebase configuration and session code are included.';if(backend==='firebase')drawQR(link)}catch(e){status(friendly(e),true)}}
+function drawQR(text){const qr=new window.LDQRCode(-1,1);qr.addData(text);qr.make();const n=qr.getModuleCount(),scale=6,quiet=4,c=$('ldQR');c.width=c.height=(n+quiet*2)*scale;const ctx=c.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#102c37';for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(qr.isDark(y,x))ctx.fillRect((x+quiet)*scale,(y+quiet)*scale,scale,scale)}
+async function join(){if(busy)return;busy=true;try{const id=$('ldJoinCode').value.trim().toUpperCase(),name=$('ldName').value.trim();if(!/^[A-F0-9]{12}$/.test(id))throw Error('Enter your teacher’s 12-character session code.');if(!name||name.length>40)throw Error('Enter your name (up to 40 characters).');if(backend==='demo'){let player=sessionStorage.getItem('ld-preview-student');if(!player){player=uid();sessionStorage.setItem('ld-preview-student',player)}auth={uid:player}}else{if(!auth)await signIn();await syncClock()}const s=await db('ldSessions/'+id);if(!s)throw Error('Session not found. Scan the teacher’s current QR code.');let p=await db('ldPlayers/'+id+'/'+auth.uid);if(!p){if(!['waiting','live'].includes(s.meta.state))throw Error('This mission is not accepting new players.');await db('ldPlayers/'+id+'/'+auth.uid,'PUT',{name,joinedAt:stamp});p=await db('ldPlayers/'+id+'/'+auth.uid)}session=s;sessionId=id;self=p;choice=null;try{pending=JSON.parse(localStorage.getItem(pendingKey())||'null')}catch{pending=null}sessionStorage.setItem('ld-last-student:'+cfg.databaseURL,id);localStorage.setItem('ld-display-name',self.name);$('ldJoinCard').hidden=true;$('ldPlayCard').hidden=false;try{await flushPending()}finally{renderStudent()}status('Joined as '+self.name+'. Keep this tab open during the mission.')}finally{busy=false}}
+function pendingKey(){return 'ld-unsent:'+backend+':'+sessionId+':'+auth.uid}
+function questionEntry(){return Object.entries(session.questions).sort(([a],[b])=>a.localeCompare(b)).find(([id])=>!self.answers?.[id])}
+function img(name,className){const im=new Image();im.src=ASSETS.images[name];im.alt=name;im.className=className;im.draggable=false;return im}
+let renderedQuestion='';function renderStudent(){if(!self||!session)return;const count=Object.keys(self.answers||{}).length,total=Object.keys(session.questions).length;$('ldStudentProgress').textContent=self.name+' · '+count+' / '+total+' answers saved';const state=session.meta.state,entry=questionEntry(),playing=state==='live'&&secondsLeft(session.meta)>0;
+$('ldSubmit').disabled=!playing||!choice||!!pending;$('ldRetrySync').hidden=!pending;$('ldScanStage').hidden=!entry;$('ldChoices').hidden=!entry;$('ldRevealPicture').hidden=!entry;$('ldSubmit').hidden=!entry;
+if(!entry){$('ldQuestion').textContent='Mission complete!';$('ldStudentMessage').textContent='All answers are saved. Your teacher will publish the scores when the session ends.'}else if(state==='waiting'){$('ldQuestion').textContent='You’re on the team!';$('ldStudentMessage').textContent='Wait for your teacher to start.';$('ldScanStage').hidden=$('ldChoices').hidden=$('ldRevealPicture').hidden=$('ldSubmit').hidden=true}else{const [id,q]=entry;$('ldQuestion').textContent=q.prompt;if(renderedQuestion!==sessionId+id){renderedQuestion=sessionId+id;choice=null;$('ldChoices').replaceChildren();for(const [k,text]of Object.entries(q.choices)){const b=document.createElement('button');b.textContent=text;b.setAttribute('aria-pressed','false');b.onclick=()=>{choice=k;for(const c of $('ldChoices').children)c.setAttribute('aria-pressed',String(c===b));renderStudent()};$('ldChoices').append(b)}const pic=$('ldScanPicture');pic.classList.remove('revealed');pic.replaceChildren();$('ldRoom').style.backgroundImage='url("'+ASSETS.bg+'")';if(session.meta.game==='words')pic.append(img(q.item,'ld-specimen'));else{const d=document.createElement('div');d.className='ld-location';d.dataset.prep=q.prep;d.append(img(q.anchor,'ld-anchor'),img(q.item,'ld-small'));if(q.prep==='in')d.append(img(q.anchor,'ld-front'));pic.append(d)}}for(const b of $('ldChoices').children)b.disabled=!playing||!!pending;$('ldStudentMessage').textContent=pending?'Answer saved on this device; waiting to sync.':state==='paused'?'Teacher paused the mission. Your progress is saved.':state==='ended'?'This mission has ended.':!playing?'Time is up. Waiting for final results.':'Scan the picture, choose your answer, then press Send answer.';$('ldSubmit').disabled=!playing||!choice||!!pending}
+if(state==='ended')db('ldResults/'+sessionId+'/'+auth.uid).then(r=>{if(r)$('ldStudentMessage').textContent='Your score: '+r.score+' / '+r.total*10+' · Rank '+r.rank+' · '+formatTime(r.activeMs)+' active time.'}).catch(()=>{});tick()}
+async function sendAnswer(){if(busy||pending||!choice||!session||session.meta.state!=='live')return;const entry=questionEntry();if(!entry)return;busy=true;try{pending={q:entry[0],choice};localStorage.setItem(pendingKey(),JSON.stringify(pending));$('ldSubmit').disabled=true;await flushPending();choice=null;renderStudent()}finally{busy=false;renderStudent()}}
+async function flushPending(){if(!pending||!session||session.meta.state!=='live'||secondsLeft(session.meta)<=0)return;const existing=await db('ldPlayers/'+sessionId+'/'+auth.uid+'/answers/'+pending.q);if(!existing)await db('ldPlayers/'+sessionId+'/'+auth.uid+'/answers/'+pending.q,'PUT',{choice:pending.choice,at:stamp});self=await db('ldPlayers/'+sessionId+'/'+auth.uid);localStorage.removeItem(pendingKey());pending=null;choice=null;status('Answer saved. Your teacher can see your progress.')}
+async function poll(){if(ROOT.hidden||!sessionId||polling||busy)return;polling=true;try{const s=await db('ldSessions/'+sessionId);if(!s)throw Error('This session is no longer available.');session=s;if(role==='teacher'){players=await db('ldPlayers/'+sessionId)||{};renderDashboard();if(session.meta.state==='live'&&secondsLeft(session.meta)<=0)await control('ended')}else{self=await db('ldPlayers/'+sessionId+'/'+auth.uid);await flushPending();renderStudent()}}catch(e){status(friendly(e),true)}finally{polling=false}}
+function tick(){if(!session)return;const left=secondsLeft(session.meta),text=left===Infinity?'No time limit':formatTime(left*1000);$('ldClock').textContent=session.meta.state==='waiting'?'Waiting to start':text+' · '+session.meta.state;$('ldCountdown').textContent=text;if(role==='student'&&session.meta.state==='live'&&left<=0){$('ldSubmit').disabled=true;for(const b of $('ldChoices').children)b.disabled=true}}
+function download(name,text,type){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([text],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function exportCSV(){if(!session)return;const rows=ranked(session,keys,players);const safe=v=>{let t=String(v??'');if(/^[=+@\-\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};const all=[['session','class','player_id','rank','name','score','answered','active_seconds','joined_at','last_answer_at'],...rows.map((r,i)=>[sessionId,session.meta.title,r.id,i+1,r.name,r.score,r.answered,Math.floor(r.time/1000),new Date(r.joinedAt).toISOString(),r.at?new Date(r.at).toISOString():''])];download('detectives-'+sessionId+'.csv','\uFEFF'+all.map(r=>r.map(safe).join(',')).join('\r\n'),'text/csv;charset=utf-8')}
+$('ldApiKey').value=cfg.apiKey;$('ldDatabaseURL').value=cfg.databaseURL;$('ldBaseURL').value=/^https?:/.test(location.protocol)?location.href.split('#')[0]:'';
+$('ldBackend').onchange=()=>{backend=$('ldBackend').value;setRole('teacher');status(backend==='demo'?'Local preview selected.':'Enter your Firebase connection and teacher sign-in.')};$('ldLogin').onclick=run(async()=>{cfg=readConfig();await signIn($('ldEmail').value.trim(),$('ldPassword').value);localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));$('ldPassword').value='';updateConnection();await teacherReady();status('Connected. You can create a live classroom session.')});$('ldLogout').onclick=()=>{authStore().removeItem('ld-auth:'+backend+':'+role+':'+cfg.databaseURL);auth=null;setRole(role);status('Signed out. Saved class results remain in Firebase.')};$('ldTeacherTab').onclick=()=>setRole('teacher');$('ldStudentTab').onclick=()=>setRole('student');$('ldClose').onclick=close;$('ldCreate').onclick=run(createSession);$('ldLoad').onclick=run(()=>loadSession($('ldExisting').value));$('ldStart').onclick=run(()=>control('live'));$('ldPause').onclick=run(()=>control('paused'));$('ldEnd').onclick=run(()=>control('ended'));$('ldShowRanks').onchange=renderDashboard;$('ldExport').onclick=run(exportCSV);$('ldPublish').onclick=run(async()=>{players=await db('ldPlayers/'+sessionId)||{};await publishResults();status('Scores published again.')});$('ldBaseURL').onchange=()=>{if(sessionId)makeInvite()};$('ldCopy').onclick=run(async()=>{await navigator.clipboard.writeText($('ldLink').value);status('Student link copied.')});$('ldOpenStudent').onclick=()=>window.open($('ldLink').value,'_blank','noopener');$('ldDownloadQR').onclick=()=>{const a=document.createElement('a');a.href=$('ldQR').toDataURL('image/png');a.download='mission-'+sessionId+'-QR.png';a.click()};$('ldJoin').onclick=run(join);$('ldSubmit').onclick=run(sendAnswer);$('ldRetrySync').onclick=run(async()=>{await flushPending();renderStudent()});$('ldRevealPicture').onclick=()=>$('ldScanPicture').classList.toggle('revealed');
+const stage=$('ldScanStage');let beam={x:50,y:50};function scan(x,y){beam={x:Math.max(0,Math.min(100,x)),y:Math.max(0,Math.min(100,y))};stage.style.setProperty('--sx',beam.x+'%');stage.style.setProperty('--sy',beam.y+'%')}stage.onpointerdown=e=>{stage.setPointerCapture(e.pointerId);move(e)};function move(e){const r=stage.getBoundingClientRect();scan((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100)}stage.onpointermove=move;stage.onkeydown=e=>{const d={ArrowLeft:[-5,0],ArrowRight:[5,0],ArrowUp:[0,-5],ArrowDown:[0,5]}[e.key];if(d){e.preventDefault();scan(beam.x+d[0],beam.y+d[1])}};
+for(const parent of [document.querySelector('.home-dash-nav'),document.querySelector('.round-actions')])if(parent){const b=document.createElement('button');b.textContent='Live Classroom';b.onclick=()=>open();parent.append(b)}
+// The hash contains public connection details only, never a teacher token or password.
+try{if(location.hash.startsWith('#ld=')){const payload=JSON.parse(atob(location.hash.slice(4)));if(payload.cfg){if(!configValid(payload.cfg))throw Error('Invalid class connection in the link.');cfg=payload.cfg;backend='firebase'}else backend=payload.demo?'demo':'firebase';open('student');$('ldJoinCode').value=String(payload.id||'').toUpperCase();$('ldName').value=localStorage.getItem('ld-display-name')||'';status(backend==='demo'?'Student preview · same browser only.':'Enter your name to join your teacher’s mission.')}}catch(e){open('student');status('This session link is invalid. Ask your teacher for a new QR code.',true)}
+window.addEventListener('online',()=>poll());document.addEventListener('visibilitychange',()=>{if(!document.hidden)poll()});
+// Pure helpers are available for local verification without a Firebase account.
+window.LDLiveHelpers={buildQuestions,elapsedAt,ranked,configValid};
+})();
+
+</script>
